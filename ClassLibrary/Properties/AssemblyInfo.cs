@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -34,3 +35,17 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+
+namespace ClassLibrary
+{
+    public class clsStaff
+    {
+        public int EmployeeID { get; set; }
+        public string EmployeeName { get; set; }
+        public string EmployeePosition { get; set; }
+        public string EmployeeEmail { get; set; }
+        public DateTime EmployeeStartDate { get; set; }
+        public double EmployeeSalary { get; set; }
+        public bool BonusEligible { get; set; }
+    }
+}
