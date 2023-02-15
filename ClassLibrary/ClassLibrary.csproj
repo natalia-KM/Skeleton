@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="clsOrder.cs" />
+    <Compile Include="clsOrderLine.cs" />
     <Compile Include="clsCustomer.cs" />
     <Compile Include="clsStock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
