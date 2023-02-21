@@ -7,7 +7,7 @@ namespace Testing4
     [TestClass]
     public class tstStaff
     {
-         
+ 
         [TestMethod]
         public void InstanceOK()
         {
