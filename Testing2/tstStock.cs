@@ -31,6 +31,32 @@ namespace Testing2
         }
 
         [TestMethod]
+        public void ProductNoPropertyOK()
+        {
+            //creates an instance of the class in the variable stock
+            clsStock stock = new clsStock();
+            //creates test data of type Int32 to compare to the property
+            Int32 TestData = 1;
+            //assigns the test data to the property
+            stock.ProductNo = TestData;
+            //checks if the test data and the property are the same
+            Assert.AreEqual(stock.ProductNo, TestData);
+        }
+
+        [TestMethod]
+        public void ProductDescriptionPropertyOK()
+        {
+            //creates an instance of the class in the variable stock
+            clsStock stock = new clsStock();
+            //creates test data of type string to compare to the property
+            string TestData = "Nike Revival Ball";
+            //assigns the test data to the property
+            stock.ProductDescription = TestData;
+            //checks if the test data and the property are the same
+            Assert.AreEqual(stock.ProductDescription, TestData);
+        }
+
+        [TestMethod]
         public void DataAddedPropertyOK()
         {
             //creates an instance of the class in the variable stock
@@ -51,9 +77,9 @@ namespace Testing2
             //creates test data of type String to compare to the property
             string TestData = "XS - XXL";
             //assigns the test data to the property
-            clsStock.Size = TestData;
+            stock.Size = TestData;
             //checks if the test data and the property are the same
-            Assert.AreEqual(clsStock.Size, TestData);
+            Assert.AreEqual(stock.Size, TestData);
         }
 
         [TestMethod]
@@ -64,9 +90,9 @@ namespace Testing2
             //creates test data of type String to compare to the property
             string TestData = "Basketball";
             //assigns the test data to the property
-            clsStock.Type = TestData;
+            stock.Type = TestData;
             //checks if the test data and the property are the same
-            Assert.AreEqual(clsStock.Type, TestData);
+            Assert.AreEqual(stock.Type, TestData);
         }
 
         [TestMethod]
@@ -77,9 +103,9 @@ namespace Testing2
             //creates test data of type Integer to compare to the property
             Int32 TestData = 30;
             //assigns the test data to the property
-            clsStock.Stock = TestData;
+            stock.Stock = TestData;
             //checks if the test data and the property are the same
-            Assert.AreEqual(clsStock.Stock, TestData);
+            Assert.AreEqual(stock.Stock, TestData);
         }
 
         [TestMethod]
@@ -90,9 +116,9 @@ namespace Testing2
             //creates test data of type Double to compare to the property
             double TestData = 80.0000;
             //assigns the test data to the property
-            clsStock.Price = TestData;
+            stock.Price = TestData;
             //checks if the test data and the property are the same
-            Assert.AreEqual(clsStock.Price, TestData);
+            Assert.AreEqual(stock.Price, TestData);
         }
     }
 }
