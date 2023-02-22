@@ -10,8 +10,7 @@
     <form id="form1" runat="server">
         <div>
         </div>
-        <asp:Label ID="lblEmployeeID" runat="server" Text="Employee ID" width="180px"></asp:Label>
-        <asp:TextBox ID="txtEmployeeID" runat="server"></asp:TextBox>
+
         <p>
             <asp:Label ID="lblEmployeeName" runat="server" Text="Employee Name" width="180px"></asp:Label>
             <asp:TextBox ID="txtEmployeeName" runat="server"></asp:TextBox>
@@ -31,7 +30,7 @@
             <asp:TextBox ID="txtEmployeeSalary" runat="server"></asp:TextBox>
         </p>
         <p>
-            <asp:CheckBox ID="CheckBox1" runat="server" OnCheckedChanged="CheckBox1_CheckedChanged" Text="Bonus Eligible" />
+            <asp:CheckBox ID="CheckBoxBonus" runat="server" OnCheckedChanged="CheckBox1_CheckedChanged" Text="Bonus Eligible" />
         </p>
         <asp:Label ID="lblError" runat="server"></asp:Label>
         <p>

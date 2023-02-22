@@ -12,6 +12,8 @@ public partial class _1Viewer : System.Web.UI.Page
     {
         clsStaff staff = new clsStaff();
         staff = (clsStaff)Session["staff"];
-        Response.Write(staff.EmployeeName);
+        Response.Write("Name: " + staff.EmployeeName + "<br>Position: " + staff.EmployeePosition + "<br>Email: " + staff.EmployeeEmail + "<br>Salary:"
+            + staff.EmployeeSalary + "<br>Start Date: " + staff.EmployeeStartDate + "<br>Bonus Eligible: " + staff.BonusEligible);
+    
     }
 }
