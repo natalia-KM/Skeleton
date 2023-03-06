@@ -25,11 +25,16 @@ public partial class _1_DataEntry : System.Web.UI.Page
         AStock.Size = txtSize.Text;
         AStock.Type = txtType.Text;
         AStock.Stock = Convert.ToInt32(txtStock.Text);
-        AStock.Price = Convert.ToDouble(txtStock.Text);
+        AStock.Price = Convert.ToDouble(txtPrice.Text);
 
         //store the stock in the session object
         Session["AStock"] = AStock;
         //Redirects you to the 'StockViewer' page
         Response.Redirect("StockViewer.aspx");
+    }
+
+    protected void txtPrice_TextChanged(object sender, EventArgs e)
+    {
+
     }
 }

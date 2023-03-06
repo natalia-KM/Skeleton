@@ -120,5 +120,174 @@ namespace Testing2
             //checks if the test data and the property are the same
             Assert.AreEqual(stock.Price, TestData);
         }
+
+        [TestMethod]
+        public void FindMethodOK()
+        {
+            //creates an instance of the class in the variable stock
+            clsStock stock = new clsStock();
+            //boolean variable with the default value 'false', will be used for validation
+            Boolean Found = false;
+            //assigns a variable with test data to use for the method 
+            Int32 ProductNo = 3;
+            //invokes the method
+            Found = stock.Find(ProductNo);
+            //checks if the result is true
+            Assert.IsTrue(Found);
+        }
+
+        [TestMethod]
+        public void TestStockNoFound()
+        {
+            //creates an instance of the class in the variable stock
+            clsStock stock = new clsStock();
+            //boolean variable with the default value 'false', will be used for validation
+            Boolean Found = false;
+            //boolean variable to make sure the data is ok
+            Boolean OK = true;
+            //assigns a variable with test data to use for the method
+            Int32 ProductNo = 3;
+            //invokes the method
+            Found = stock.Find(ProductNo);
+            //if the ProductNo is not equal to 3 then it sets OK to false
+            if(stock.ProductNo != 3)
+            {
+                OK = false;
+            }
+            //checks if the result is true
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestProductDescriptionFound()
+        {
+            //creates an instance of the class in the variable stock
+            clsStock stock = new clsStock();
+            //boolean variable with the default value 'false', will be used for validation
+            Boolean Found = false;
+            //boolean variable to make sure the data is ok
+            Boolean OK = true;
+            //assigns a variable with test data to use for the method
+            Int32 ProductNo = 3;
+            //invokes the method
+            Found = stock.Find(ProductNo);
+            //if the product description does not match then OK will be set to false
+            if (stock.ProductDescription != "Nike Revival Ball")
+            {
+                OK = false;
+            }
+            //checks if the result is true
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestDataAddedFound()
+        {
+            //creates an instance of the class in the variable stock
+            clsStock stock = new clsStock();
+            //boolean variable with the default value 'false', will be used for validation
+            Boolean Found = false;
+            //boolean variable to make sure the data is ok
+            Boolean OK = true;
+            //assigns a variable with test data to use for the method
+            Int32 ProductNo = 3;
+            //invokes the method
+            Found = stock.Find(ProductNo);
+            //if the DateAdded does not match then OK will be set to false
+            if (stock.DateAdded != Convert.ToDateTime("09/02/2023"))
+            {
+                OK = false;
+            }
+            //checks if the result is true
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestSizeFound()
+        {
+            //creates an instance of the class in the variable stock
+            clsStock stock = new clsStock();
+            //boolean variable with the default value 'false', will be used for validation
+            Boolean Found = false;
+            //boolean variable to make sure the data is ok
+            Boolean OK = true;
+            //assigns a variable with test data to use for the method
+            Int32 ProductNo = 3;
+            //invokes the method
+            Found = stock.Find(ProductNo);
+            //if the Size does not match then OK will be set to false
+            if (stock.Size != "7")
+            {
+                OK = false;
+            }
+            //checks if the result is true
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestTypeFound()
+        {
+            //creates an instance of the class in the variable stock
+            clsStock stock = new clsStock();
+            //boolean variable with the default value 'false', will be used for validation
+            Boolean Found = false;
+            //boolean variable to make sure the data is ok
+            Boolean OK = true;
+            //assigns a variable with test data to use for the method
+            Int32 ProductNo = 3;
+            //invokes the method
+            Found = stock.Find(ProductNo);
+            //if the type does not match then OK will be set to false
+            if (stock.Type != "Basketball")
+            {
+                OK = false;
+            }
+            //checks if the result is true
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestStockFound()
+        {
+            //creates an instance of the class in the variable stock
+            clsStock stock = new clsStock();
+            //boolean variable with the default value 'false', will be used for validation
+            Boolean Found = false;
+            //boolean variable to make sure the data is ok
+            Boolean OK = true;
+            //assigns a variable with test data to use for the method
+            Int32 ProductNo = 3;
+            //invokes the method
+            Found = stock.Find(ProductNo);
+            //if the Stock does not match then OK will be set to false
+            if (stock.Stock != 50)
+            {
+                OK = false;
+            }
+            //checks if the result is true
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestPriceFound()
+        {
+            //creates an instance of the class in the variable stock
+            clsStock stock = new clsStock();
+            //boolean variable with the default value 'false', will be used for validation
+            Boolean Found = false;
+            //boolean variable to make sure the data is ok
+            Boolean OK = true;
+            //assigns a variable with test data to use for the method
+            Int32 ProductNo = 3;
+            //invokes the method
+            Found = stock.Find(ProductNo);
+            //if the Price does not match then OK will be set to false
+            if (stock.Price != 14.99)
+            {
+                OK = false;
+            }
+            //checks if the result is true
+            Assert.IsTrue(OK);
+        }
     }
 }

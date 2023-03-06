@@ -28,7 +28,7 @@
         <asp:TextBox ID="txtStock" runat="server" style="margin-left: 10px" TextMode="Number"></asp:TextBox>
         <br />
         <asp:Label ID="lblPrice" runat="server" Text="Price" width="121px"></asp:Label>
-        <asp:TextBox ID="txtPrice" runat="server" style="margin-left: 10px"></asp:TextBox>
+        <asp:TextBox ID="txtPrice" runat="server" style="margin-left: 10px" OnTextChanged="txtPrice_TextChanged"></asp:TextBox>
         <p>
             <asp:Label ID="lblError" runat="server"></asp:Label>
         </p>
