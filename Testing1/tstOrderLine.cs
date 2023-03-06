@@ -88,5 +88,152 @@ namespace Testing1
             // test to see that the two values are the same
             Assert.AreEqual(AnOrderLine.TotalCost, TestData);
         }
+
+        [TestMethod]
+        public void FindMethodOK()
+        {
+            //create an instance of the class we want to create
+            clsOrderLine AnOrderLine = new clsOrderLine();
+            //Boolean variable to store the results of the validation
+            Boolean found = false;
+            //Some test data created here to use with the Find method
+            Int32 OrderLineNo = 2;
+            //Method is then invoked
+            found = AnOrderLine.Find(OrderLineNo);
+            //test to see if the result is true, we do an assert on the boolean variable found
+            Assert.IsTrue(found);
+        }
+
+        [TestMethod]
+        public void TestOrderLineNoFound()
+        {
+            //create an instance of the class we want to create
+            clsOrderLine AnOrderLine = new clsOrderLine();
+            //Boolean variable to store the results of the search
+            Boolean found = false;
+            //Boolean variable to record if data is OK (assume it is)
+            Boolean OK = true;
+            //Some test data created here to use with the Find method
+            Int32 OrderLineNo = 2;
+            //Method is then invoked
+            found = AnOrderLine.Find(OrderLineNo);
+            //check the OrderLineNo
+            if (AnOrderLine.OrderLineNo != 2)
+            {
+                OK = false;
+            }
+            //test to see that the result is correct
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestOrderIDFound()
+        {
+            //create an instance of the class we want to create
+            clsOrderLine AnOrderLine = new clsOrderLine();
+            //Boolean variable to store the results of the search
+            Boolean found = false;
+            //Boolean variable to record if data is OK (assume it is)
+            Boolean OK = true;
+            //Some test data created here to use with the Find method
+            Int32 OrderLineNo = 2;
+            //Method is then invoked
+            found = AnOrderLine.Find(OrderLineNo);
+            //check the OrderID
+            if (AnOrderLine.OrderID != 1)
+            {
+                OK = false;
+            }
+            //test to see that the result is correct
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestProductNoFound()
+        {
+            //create an instance of the class we want to create
+            clsOrderLine AnOrderLine = new clsOrderLine();
+            //Boolean variable to store the results of the search
+            Boolean found = false;
+            //Boolean variable to record if data is OK (assume it is)
+            Boolean OK = true;
+            //Some test data created here to use with the Find method
+            Int32 OrderLineNo = 2;
+            //Method is then invoked
+            found = AnOrderLine.Find(OrderLineNo);
+            //check the ProductNo
+            if (AnOrderLine.ProductNo != 1)
+            {
+                OK = false;
+            }
+            //test to see that the result is correct
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestProductDescriptionFound()
+        {
+            //create an instance of the class we want to create
+            clsOrderLine AnOrderLine = new clsOrderLine();
+            //Boolean variable to store the results of the search
+            Boolean found = false;
+            //Boolean variable to record if data is OK (assume it is)
+            Boolean OK = true;
+            //Some test data created here to use with the Find method
+            Int32 OrderLineNo = 2;
+            //Method is then invoked
+            found = AnOrderLine.Find(OrderLineNo);
+            //check the ProductDescription
+            if (AnOrderLine.ProductDescription != "Nike Revival Ball")
+            {
+                OK = false;
+            }
+            //test to see that the result is correct
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestItemQuantityFound()
+        {
+            //create an instance of the class we want to create
+            clsOrderLine AnOrderLine = new clsOrderLine();
+            //Boolean variable to store the results of the search
+            Boolean found = false;
+            //Boolean variable to record if data is OK (assume it is)
+            Boolean OK = true;
+            //Some test data created here to use with the Find method
+            Int32 OrderLineNo = 2;
+            //Method is then invoked
+            found = AnOrderLine.Find(OrderLineNo);
+            //check the ItemQuantity
+            if (AnOrderLine.ItemQuantity != 2)
+            {
+                OK = false;
+            }
+            //test to see that the result is correct
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestTotalCostFound()
+        {
+            //create an instance of the class we want to create
+            clsOrderLine AnOrderLine = new clsOrderLine();
+            //Boolean variable to store the results of the search
+            Boolean found = false;
+            //Boolean variable to record if data is OK (assume it is)
+            Boolean OK = true;
+            //Some test data created here to use with the Find method
+            Int32 OrderLineNo = 2;
+            //Method is then invoked
+            found = AnOrderLine.Find(OrderLineNo);
+            //check the TotalCost
+            if (AnOrderLine.TotalCost != Convert.ToDouble(29.9800))
+            {
+                OK = false;
+            }
+            //test to see that the result is correct
+            Assert.IsTrue(OK);
+        }
     }
 }
