@@ -37,4 +37,34 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
     }
 
+
+    protected void btnFind_Click(object sender, EventArgs e)
+    {
+        //create an instance of the Order class
+        clsOrder AnOrder = new clsOrder();
+        //variable to store the primary key
+        Int32 OrderID;
+        //variable to store the result of the find operation
+        Boolean Found = false;
+        //get the primary key entered by the user
+        OrderID = Convert.ToInt32(txtOrderID.Text);
+        //find the record
+        Found = AnOrder.Find(OrderID);
+        //if found
+        if (Found == true)
+        {
+            //display the values of the properties of the record with specific OrderID, in the form
+            lblError.Text = "";
+            txtOrderDate.Text = AnOrder.OrderDate.ToString();
+            txtOrderCost.Text = AnOrder.OrderCost.ToString();
+            txtCustomerID.Text = AnOrder.CustomerID.ToString();
+            txtNotes.Text = AnOrder.Notes;
+            chkDispatched.Checked = AnOrder.Dispatched;
+            txtOrderQuantity.Text = AnOrder.OrderQuantity.ToString();
+        }
+        else
+        {
+            lblError.Text = "Record with OrderID " + txtOrderID.Text + " not found";
+        }
+    }
 }

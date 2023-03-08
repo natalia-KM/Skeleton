@@ -11,6 +11,7 @@
         <div>
             <asp:Label ID="lblOrderID" runat="server" Text="Order ID" width="92px"></asp:Label>
             <asp:TextBox ID="txtOrderID" runat="server" Height="16px" style="margin-left: 11px" Width="105px"></asp:TextBox>
+            <asp:Button ID="btnFind" runat="server" OnClick="btnFind_Click" style="margin-left: 21px; margin-top: 0px" Text="FIND" />
         </div>
         <p>
             <asp:Label ID="lblOrderDate" runat="server" Text="Order Date" width="92px"></asp:Label>
@@ -30,7 +31,7 @@
         </p>
         <asp:CheckBox ID="chkDispatched" runat="server" BorderWidth="0px" style="margin-left: 2px; margin-bottom: 0px" Text="Dispatched" Width="99px" />
         <p>
-            <asp:Label ID="lblError" runat="server"></asp:Label>
+            <asp:Label ID="lblError" runat="server" ForeColor="#FF3300"></asp:Label>
         </p>
         <asp:Button ID="btnOK" runat="server" OnClick="btnOK_Click" Text="OK" Width="40px" />
         <asp:Button ID="btnCancel" runat="server" OnClick="btnCancel_Click" style="margin-left: 13px" Text="CANCEL" Width="77px" />
