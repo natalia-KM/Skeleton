@@ -98,14 +98,25 @@ namespace ClassLibrary
 
         public bool Find(Int32 empID)
         {
-            mEmpID = 1;
-            mEmpName = "Natalia";
-            mEmpPosition = "Manager";
-            mEmpEmail = "nat@gmail.com";
-            mEmpStartDate = Convert.ToDateTime("05/02/2023");
-            mEmpSalary = 23000.0;
-            mBonusE = false;
-            return true;
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@EmployeeID", empID);
+            DB.Execute("sproc_tblStaff_FilterByEmployeeID");
+
+            if(DB.Count==1)
+            {
+                mEmpID = Convert.ToInt32(DB.DataTable.Rows[0]["EmployeeID"]);
+                mEmpName = Convert.ToString(DB.DataTable.Rows[0]["EmployeeName"]);
+                mEmpPosition = Convert.ToString(DB.DataTable.Rows[0]["EmployeePosition"]);
+                mEmpEmail = Convert.ToString(DB.DataTable.Rows[0]["EmployeeEmail"]);
+                mEmpStartDate = Convert.ToDateTime(DB.DataTable.Rows[0]["EmployeeStartDate"]);
+                mEmpSalary = Convert.ToDouble(DB.DataTable.Rows[0]["EmployeeSalary"]);
+                mBonusE = Convert.ToBoolean(DB.DataTable.Rows[0]["BonusEligible"]);
+                return true;
+            } else
+            {
+                return false;
+            }
+            
         }
     }
 }
