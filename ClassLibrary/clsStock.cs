@@ -125,16 +125,35 @@ namespace ClassLibrary
             }
         }
 
-        public bool Find(int productNo)
+        public bool Find(int ProductNo)
         {
-            mProductNo = 3;
-            mProductDescription = "Nike Revival Ball";
-            mDateAdded = Convert.ToDateTime("09/02/2023");
-            mSize = "7";
-            mType = "Basketball";
-            mStock = 50;
-            mPrice = 14.99;
-            return true;
+            //creates an instance of DataConnection
+            clsDataConnection DB = new clsDataConnection();
+            //adds the parameter for the ProductNo for searching
+            DB.AddParameter("@ProductNo", ProductNo);
+            //executes the stored procedure
+            DB.Execute("sproc_tblProducts_FilterByProductNo");
+            
+            //if a record is found it will add all the data into the private data members
+            if(DB.Count == 1)
+            {
+                mProductNo = Convert.ToInt32(DB.DataTable.Rows[0]["ProductNo"]);
+                mProductDescription = Convert.ToString(DB.DataTable.Rows[0]["ProductDescription"]);
+                mDateAdded = Convert.ToDateTime(DB.DataTable.Rows[0]["DateAdded"]);
+                mSize = Convert.ToString(DB.DataTable.Rows[0]["Size"]);
+                mType = Convert.ToString(DB.DataTable.Rows[0]["Type"]);
+                mStock = Convert.ToInt32(DB.DataTable.Rows[0]["Stock"]);
+                mPrice = Convert.ToDouble(DB.DataTable.Rows[0]["Price"]);
+
+                //when everything worked it returns true
+                return true;
+            }
+            
+            //if no record was found it will return false
+            else
+            {
+                return false;
+            }
         }
     }
 }

@@ -29,12 +29,38 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
         //store the stock in the session object
         Session["AStock"] = AStock;
-        //Redirects you to the 'StockViewer' page
+        //redirects you to the 'StockViewer' page
         Response.Redirect("StockViewer.aspx");
     }
 
     protected void txtPrice_TextChanged(object sender, EventArgs e)
     {
 
+    }
+
+    protected void btnFind_Click(object sender, EventArgs e)
+    {
+        //creates an instance of the stock class
+        clsStock Stock = new clsStock();
+        //create the variable ProductNo (Primary Key)
+        Int32 ProductNo;
+        //boolean variable to store the result of the find operation
+        Boolean Found = false;
+        //collects the primary key inputted by the user
+        ProductNo = Convert.ToInt32(txtProductNo.Text);
+        //uses find to find the record related to the inputted ProductNo
+        Found = Stock.Find(ProductNo);
+
+        //if the ProductNo was found
+        if(Found == true)
+        {
+            //displays the values from the table record
+            txtProductDescription.Text = Stock.ProductDescription;
+            txtDateAdded.Text = Stock.DateAdded.ToString();
+            txtSize.Text = Stock.Size;
+            txtType.Text = Stock.Type;
+            txtStock.Text = Stock.Stock.ToString();
+            txtPrice.Text = Stock.Price.ToString();
+        }
     }
 }
