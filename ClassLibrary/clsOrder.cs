@@ -136,5 +136,28 @@ namespace ClassLibrary
                 return false;
             }
         }
+
+        public string Valid(string orderDate, string orderCost, string customerID, string notes, string orderQuantity)
+        {
+            //create a string variable to store the error
+            String Error = "";
+            //create a temporary variable to store date values
+            DateTime DateTemp;
+            //copy the orderDate value to the DateTemp variable
+            DateTemp = Convert.ToDateTime(orderDate);
+            if (DateTemp < DateTime.Now.Date)
+            {
+                //record the error
+                Error = Error + "The OrderDate cannot be in the past ; ";
+            }
+            //check to see if the date is greater than today's date
+            if (DateTemp > DateTime.Now.Date)
+            {
+                //record the error
+                Error = Error + "The OrderDate cannot be in the future ; ";
+            }
+            //return any error messages
+            return Error;
+        }
     }
 }
