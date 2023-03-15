@@ -27,4 +27,33 @@ public partial class _1_DataEntry : System.Web.UI.Page
         Response.Redirect("CustomerViewer.aspx");
 
     }
+
+    protected void btnFind_Click(object sender, EventArgs e)
+    {
+        //create an instance of the Customer class
+        clsCustomer ACustomer = new clsCustomer();
+        //variable to store the primary key
+        Int32 CustomerID;
+        //variable to store the result of the find operation
+        Boolean Found = false;
+        //get the primary key entered by the user
+        CustomerID = Convert.ToInt32(txtCustomerID.Text);
+        //find the record
+        Found = ACustomer.Find(CustomerID);
+        //if found
+        if (Found == true)
+        {
+            lblError.Text = "";
+            txtFullName.Text = ACustomer.FullName.ToString();
+            txtEmail.Text = ACustomer.Email.ToString();
+            txtPhoneNumber.Text = ACustomer.PhoneNumber.ToString();
+            txtDateOfBirth.Text = ACustomer.DateOfBirth.ToString();
+            txtTotalSpent.Text = ACustomer.TotalSpent.ToString();
+            chkPaymentDataAdded.Checked = ACustomer.PaymentDataAdded;
+        }
+        else
+        {
+            lblError.Text = "CustomerID " + txtCustomerID.Text + " not found";
+        }
+    }
 }
