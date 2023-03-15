@@ -7,6 +7,15 @@ namespace Testing1
     [TestClass]
     public class tstOrder
     {
+
+        //good test data
+        //create some test data to pass to the method
+        string OrderDate = DateTime.Now.Date.ToString();
+        string OrderCost = "402.99";
+        string CustomerID = "4";
+        string Notes = "Please deliver next door";
+        //string Dispatched = "true";
+        string OrderQuantity = "3";
         [TestMethod]
         public void InstanceOK()
         {
@@ -268,6 +277,42 @@ namespace Testing1
             }
             //test to see that the result is correct
             Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void ValidMethodOK()
+        {
+            //create an instance of the class we want to create
+            clsOrder AnOrder = new clsOrder();
+            //string variable to store any error message
+            String Error = "";
+            //invoke the method
+            Error = AnOrder.Valid(OrderDate, OrderCost, CustomerID, Notes, OrderQuantity);
+            //test to see that the result is correct
+            Assert.AreEqual(Error, ""); // check if String var Error is equal to blank string "", blank string means no errors.
+            // if the contents of the Error variable are not equal to "" blank string, this means an error or multiple errors have occurred
+
+        }
+
+        [TestMethod]
+        public void OrderDateMinLessOne()
+        {
+            //create an instance of the class we want to create
+            clsOrder AnOrder = new clsOrder();
+            //string variable to store any error message
+            String Error = "";
+            //create a variable to store the test date data
+            DateTime TestDate;
+            //set the date to todays date
+            TestDate = DateTime.Now.Date;
+            //change the date to whatever the date is less 1 day (-1, go one day back)
+            TestDate = TestDate.AddDays(-1);
+            //Convert the date variable to a string variable
+            string OrderDate = TestDate.ToString();
+            //invoke the method
+            Error = AnOrder.Valid(OrderDate, OrderCost, CustomerID, Notes, OrderQuantity);
+            //test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
         }
     }
 }
