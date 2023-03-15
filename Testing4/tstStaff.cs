@@ -7,7 +7,13 @@ namespace Testing4
     [TestClass]
     public class tstStaff
     {
- 
+
+        string empName = "Kim";
+        string empPosition = "Manager";
+        string empEmail = "kim@gmail.com";
+        string empSalary = "21000.0";
+        string empStartDate = "21/02/2023";
+
         [TestMethod]
         public void InstanceOK()
         {
@@ -202,6 +208,105 @@ namespace Testing4
             Int32 EmpID = 1;
             found = staff.Find(EmpID);
             Assert.IsTrue(found);
+        }
+
+
+        [TestMethod]
+        public void ValidMethodOK()
+        {
+            clsStaff staff = new clsStaff();
+            String Error = "";
+            Error = staff.Valid(empName, empPosition, empEmail, empSalary, empStartDate);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void EmpNameMin()
+        {
+           clsStaff staff = new clsStaff();
+           String Error = "";
+           string EmpName = "a";
+           Error = staff.Valid(EmpName, empPosition, empEmail, empSalary, empStartDate);
+           Assert.AreEqual(Error, "");
+
+        }
+
+        public void EmpNameMinLessOne()
+        {
+            clsStaff staff = new clsStaff();
+            String Error = "";
+            string EmpName = "";
+            Error = staff.Valid(EmpName, empPosition, empEmail, empSalary, empStartDate);
+            Assert.AreEqual(Error, "");
+
+        }
+
+        [TestMethod]
+        public void EmpNameMinPlusOne()
+        {
+            clsStaff staff = new clsStaff();
+            String Error = "";
+            string EmpName = "aa";
+            Error = staff.Valid(EmpName, empPosition, empEmail, empSalary, empStartDate);
+            Assert.AreEqual(Error, "");
+
+        }
+
+        [TestMethod]
+        public void EmpNameMax()
+        {
+            clsStaff staff = new clsStaff();
+            String Error = "";
+            string EmpName = "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWX";
+            Error = staff.Valid(EmpName, empPosition, empEmail, empSalary, empStartDate);
+            Assert.AreEqual(Error, "");
+
+        }
+
+        [TestMethod]
+        public void EmpNameMaxLessOne()
+        {
+            clsStaff staff = new clsStaff();
+            String Error = "";
+            string EmpName = "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVW";
+            Error = staff.Valid(EmpName, empPosition, empEmail, empSalary, empStartDate);
+            Assert.AreEqual(Error, "");
+
+        }
+
+        [TestMethod]
+        public void EmpNameMaxPlusOne()
+        {
+            clsStaff staff = new clsStaff();
+            String Error = "";
+            string EmpName = "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXY";
+            Error = staff.Valid(EmpName, empPosition, empEmail, empSalary, empStartDate);
+            Assert.AreNotEqual(Error, "");
+
+
+        }
+
+        [TestMethod]
+        public void EmpNameMid()
+        {
+            clsStaff staff = new clsStaff();
+            String Error = "";
+            string EmpName = "ABCDEFGHIJKLMNOPQRSTUVWXY";
+            Error = staff.Valid(EmpName, empPosition, empEmail, empSalary, empStartDate);
+            Assert.AreEqual(Error, "");
+
+        }
+
+        [TestMethod]
+        public void EmpNameExtremeMax()
+        {
+            clsStaff staff = new clsStaff();
+            String Error = "";
+            string EmpName = "";
+            EmpName = EmpName.PadRight(100);
+            Error = staff.Valid(EmpName, empPosition, empEmail, empSalary, empStartDate);
+            Assert.AreNotEqual(Error, "");
+
         }
     }
 }
