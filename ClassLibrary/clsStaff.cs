@@ -119,10 +119,12 @@ namespace ClassLibrary
             
         }
 
-        public string Valid(string empName, string empPosition, string empEmail, string EmpSalary, string EmpStartDate)
+        public string Valid(string empName, string empPosition, string empEmail, string empSalary, string empStartDate)
         {
             String Error = "";
 
+            //EmpName
+            //***************
             if(empName.Length == 0)
             {
                 Error = Error + "The Name may not be blank  :  ";
@@ -132,6 +134,82 @@ namespace ClassLibrary
             {
                 Error = Error + "The Name must be less than 50 characters  :  ";
             }
+
+
+            //EmpPosition
+            //***************
+            if (empPosition.Length == 0)
+            {
+                Error = Error + "The job position may not be blank  :  ";
+            }
+
+            if (empPosition.Length > 50)
+            {
+                Error = Error + "The job position must be less than 50 characters  :  ";
+            }
+
+            //EmpEmail
+            //***************
+
+            if (empEmail.Length < 11)
+            {
+                Error = Error + "The Email syntax is incorrect  :  ";
+            }
+
+            if (empEmail.Length > 50)
+            {
+                Error = Error + "The Email must be less than 50 characters  :  ";
+            }
+
+            string emailEnd = "@gmail.com";
+            string otherEnd = "@twentythree.com";
+
+            if(!(empEmail.EndsWith(emailEnd) || empEmail.EndsWith(otherEnd)))
+            {
+                Error = Error + "The Email syntax is incorrect";
+            }
+
+            double salary;
+            bool isItADouble = Double.TryParse(empSalary, out salary);
+
+            if(!isItADouble)
+            {
+                Error = Error + "The salary is not correct";
+            }
+
+            if(salary<20000.0)
+            {
+                Error = Error + "Salary is too low.   :  ";
+            }
+
+            if (salary > 100000.0)
+            {
+                Error = Error + "Salary is too low.   :  ";
+            }
+
+            DateTime EmpStartDate;
+            bool dateTimeCorrect = DateTime.TryParse(empStartDate, out EmpStartDate);
+
+            if(!dateTimeCorrect)
+            {
+                Error = Error + "Date is incorrect, try format: DD/MM/YYYY.   :  ";
+            }
+
+            DateTime companyStartDate = DateTime.Parse("01/02/2023");
+            DateTime today = DateTime.Now.Date;
+
+            if(EmpStartDate<companyStartDate)
+            {
+                Error = Error + "Date incorrect - must be before the start of the company   :  ";
+            }
+
+            if(EmpStartDate>today)
+            {
+                Error = Error + "Date incorrect. Date cannot be in the future.";
+            }
+
+           
+
 
             return Error;
         }
