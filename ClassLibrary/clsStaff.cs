@@ -118,5 +118,22 @@ namespace ClassLibrary
             }
             
         }
+
+        public string Valid(string empName, string empPosition, string empEmail, string EmpSalary, string EmpStartDate)
+        {
+            String Error = "";
+
+            if(empName.Length == 0)
+            {
+                Error = Error + "The Name may not be blank  :  ";
+            }
+
+            if(empName.Length > 50 )
+            {
+                Error = Error + "The Name must be less than 50 characters  :  ";
+            }
+
+            return Error;
+        }
     }
 }
