@@ -183,7 +183,7 @@ namespace Testing3
             Boolean OK = true;
             Int32 CustomerID = 1;
             Found = ACustomer.Find(CustomerID);
-            if (ACustomer.DateOfBirth != Convert.ToDateTime(23/12/1987))
+            if (ACustomer.DateOfBirth != Convert.ToDateTime("23/12/1987"))
             {
                 OK = false;
             }

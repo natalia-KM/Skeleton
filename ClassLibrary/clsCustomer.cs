@@ -91,14 +91,32 @@ namespace ClassLibrary
 
         public bool Find(int CustomerID)
         {
-            mCustomerID = 1;
-            mFullName = "Stefan Calarasu";
-            mEmail = "stefcsu@gmail.com";
-            mPhoneNumber = "07388596274";
-            mDateOfBirth = Convert.ToDateTime("23/12/1987");
-            mTotalSpent = 29.98;
-            mPaymentDataAdded = true;
-            return true;
+          //create an instance of the data connection
+            clsDataConnection DB = new clsDataConnection();
+            //add the parameter for the CustomerID to search for
+            DB.AddParameter("@CustomerID", CustomerID);
+            //execute the stored procedure
+            DB.Execute("sproc_tblCustomer_FilterByCustomerID");
+            //if one record is found (there should be either one or zero!)
+            if (DB.Count == 1)
+            {
+                //copy the data from the database to the private data members
+                mCustomerID = Convert.ToInt32(DB.DataTable.Rows[0]["CustomerID"]);
+                mFullName = Convert.ToString(DB.DataTable.Rows[0]["FullName"]);
+                mEmail = Convert.ToString(DB.DataTable.Rows[0]["Email"]);
+                mPhoneNumber = Convert.ToString(DB.DataTable.Rows[0]["PhoneNumber"]);
+                mDateOfBirth = Convert.ToDateTime(DB.DataTable.Rows[0]["DateOfBirth"]);
+                mTotalSpent = Convert.ToDouble(DB.DataTable.Rows[0]["TotalSpent"]);
+                mPaymentDataAdded = Convert.ToBoolean(DB.DataTable.Rows[0]["PaymentDataAdded"]);
+                //return that everything worked OK
+                return true;
+            }
+            //if no record was found
+            else
+            {
+                //return false, indicating a problem
+                return false;
+            }
         }
     }
 }
