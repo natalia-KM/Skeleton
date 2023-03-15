@@ -91,7 +91,7 @@ namespace ClassLibrary
 
         public bool Find(int CustomerID)
         {
-          //create an instance of the data connection
+            //create an instance of the data connection
             clsDataConnection DB = new clsDataConnection();
             //add the parameter for the CustomerID to search for
             DB.AddParameter("@CustomerID", CustomerID);
@@ -117,6 +117,11 @@ namespace ClassLibrary
                 //return false, indicating a problem
                 return false;
             }
+        }
+
+        public string Valid(string fullName, string email, string phoneNumber, string dateOfBirth, string totalSpent)
+        {
+            return "";
         }
     }
 }
