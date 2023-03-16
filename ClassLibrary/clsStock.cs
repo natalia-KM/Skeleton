@@ -155,5 +155,117 @@ namespace ClassLibrary
                 return false;
             }
         }
+
+        public string Valid(string ProductDescription, string DateAdded, string Size, string Type, string Stock, string Price)
+        {
+            //creates a string variable to store the error
+            String Error = "";
+            DateTime DateTemp;
+            //if the Product Description is blank
+            if (ProductDescription.Length == 0)
+            {
+                //stores the error message into the string 'Error'
+                Error += "The Product Description cannot be blank:";
+            }
+            //if the Product Description is greater than 51 characters
+            if (ProductDescription.Length > 50)
+            {
+                //stores the error message into the string 'Error'
+                Error += "The Product Description must be less than 51:";
+            }
+
+            //try - catch to add a error code for an invalid data type
+            try
+            {
+                //changes DateAdded value into DateTime
+                DateTemp = Convert.ToDateTime(DateAdded);
+                //if the date is in the past
+                if (DateTemp < DateTime.Now.Date)
+                {
+                    //stores the error message into the string 'Error'
+                    Error += "The date cannot be in the past : ";
+                }
+                //if the date is in the future
+                if (DateTemp > DateTime.Now.Date)
+                {
+                    //stores the error message into the string 'Error'
+                    Error += "The date cannot be in the future :";
+                }
+
+            }
+            catch
+            {
+                //stores the error message into the string 'Error'
+                Error += "The date was not a valid date :";
+            }
+
+            //if the value is blank
+            if (Size.Length == 0)
+            {
+                //stores the error message into the string 'Error'
+                Error += "The size cannot be left blank :";
+            }
+            //if the value is greater than 10
+            if (Size.Length > 10)
+            {
+                //stores the error message into the string 'Error'
+                Error += "The size cannot be greater than 11 :";
+            }
+
+            //if the value is blank
+            if (Type.Length == 0)
+            {
+                //stores the error message into the string 'Error'
+                Error += Error + "The type cannot be left blank :";
+            }
+            //if the value is greater than 10
+            if (Type.Length > 10)
+            {
+                //stores the error message into the string 'Error'
+                Error += "The type cannot be greater than 11 :";
+            }
+
+            //try - catch to add a error code for an invalid data type
+            try
+            {
+                //if the value is less than int32 max value
+                if (Convert.ToInt32(Stock) > Int32.MaxValue)
+                {
+                    //stores the error message into the string 'Error'
+                    Error += "The stock cannot be greater than Int32 max value :";
+                }
+            }
+            catch
+            {
+                //stores the error message into the string 'Error'
+                Error += "This is an invalid data type :";
+            }
+
+            //try - catch to add a error code for an invalid data type
+            try
+            {
+                //if the product is free
+                if (Convert.ToDouble(Price) == 0.0)
+                {
+                    //stores the error message into the string 'Error'
+                    Error += "The price cannot be 0";
+                }
+                //if the price is higher than the max value
+                if (Convert.ToDouble(Price) > Double.MaxValue)
+                {
+                    //stores the error message into the string 'Error'
+                    Error += "The price cannot be greater than the double max value :";
+                }
+            }
+            catch
+            {
+                Error += "This is an invalid data type";
+            }
+
+            //returns the error messages if found
+            return Error;
+        }
+
+        
     }
 }
