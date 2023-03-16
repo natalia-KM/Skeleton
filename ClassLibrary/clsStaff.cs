@@ -127,12 +127,12 @@ namespace ClassLibrary
             //***************
             if(empName.Length == 0)
             {
-                Error = Error + "The Name may not be blank  :  ";
+                Error = Error + "Error: the name may not be blank <br>";
             }
 
             if(empName.Length > 50 )
             {
-                Error = Error + "The Name must be less than 50 characters  :  ";
+                Error = Error + "Error: the name must be less than 50 characters <br>";
             }
 
 
@@ -140,12 +140,12 @@ namespace ClassLibrary
             //***************
             if (empPosition.Length == 0)
             {
-                Error = Error + "The job position may not be blank  :  ";
+                Error = Error + "Error: job position may not be blank <br>";
             }
 
             if (empPosition.Length > 50)
             {
-                Error = Error + "The job position must be less than 50 characters  :  ";
+                Error = Error + "Error: job position must be less than 50 characters  <br>";
             }
 
             //EmpEmail
@@ -153,12 +153,13 @@ namespace ClassLibrary
 
             if (empEmail.Length < 11)
             {
-                Error = Error + "The Email syntax is incorrect  :  ";
+                Error = Error + "Error: email syntax is incorrect  <br>";
+
             }
 
             if (empEmail.Length > 50)
             {
-                Error = Error + "The Email must be less than 50 characters  :  ";
+                Error = Error + "Error: email must be less than 50 characters  <br>";
             }
 
             string emailEnd = "@gmail.com";
@@ -166,7 +167,7 @@ namespace ClassLibrary
 
             if(!(empEmail.EndsWith(emailEnd) || empEmail.EndsWith(otherEnd)))
             {
-                Error = Error + "The Email syntax is incorrect";
+                Error = Error + "Error: email must end with @gmail.com or @twentythree.com  <br>";
             }
 
             double salary;
@@ -174,17 +175,17 @@ namespace ClassLibrary
 
             if(!isItADouble)
             {
-                Error = Error + "The salary is not correct";
+                Error = Error + "Error: salary is not correct (must be a double - e.g. 21000.0)  <br>";
             }
 
             if(salary<20000.0)
             {
-                Error = Error + "Salary is too low.   :  ";
+                Error = Error + "Error: salary is too low.   <br>";
             }
 
             if (salary > 100000.0)
             {
-                Error = Error + "Salary is too low.   :  ";
+                Error = Error + "Error: salary is too low.  <br>";
             }
 
             DateTime EmpStartDate;
@@ -192,7 +193,7 @@ namespace ClassLibrary
 
             if(!dateTimeCorrect)
             {
-                Error = Error + "Date is incorrect, try format: DD/MM/YYYY.   :  ";
+                Error = Error + "Error: date is incorrect, try format: DD/MM/YYYY   <br>";
             }
 
             DateTime companyStartDate = DateTime.Parse("01/02/2023");
@@ -200,12 +201,12 @@ namespace ClassLibrary
 
             if(EmpStartDate<companyStartDate)
             {
-                Error = Error + "Date incorrect - must be before the start of the company   :  ";
+                Error = Error + "Error: date incorrect - must be before the start of the company  <br>";
             }
 
             if(EmpStartDate>today)
             {
-                Error = Error + "Date incorrect. Date cannot be in the future.";
+                Error = Error + "Error: date incorrect. Date cannot be in the future  <br>";
             }
 
            
