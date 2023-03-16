@@ -476,7 +476,7 @@ namespace Testing2
             //invokes the method
             Error = AStock.Valid(ProductDescription, DateAdded, Size, Type, Stock, Price);
             //checks if the result is correct
-            Assert.AreNotEqual(Error, "");
+            Assert.AreEqual(Error, "");
         }
 
         [TestMethod]

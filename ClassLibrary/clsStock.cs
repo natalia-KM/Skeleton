@@ -180,10 +180,10 @@ namespace ClassLibrary
                 //changes DateAdded value into DateTime
                 DateTemp = Convert.ToDateTime(DateAdded);
                 //if the date is in the past
-                if (DateTemp < DateTime.Now.Date)
+                if (DateTemp <= DateTime.Now.Date.AddYears(-100))
                 {
                     //stores the error message into the string 'Error'
-                    Error += "The date cannot be in the past : ";
+                    Error += "The date cannot be in the 100 years in the past :";
                 }
                 //if the date is in the future
                 if (DateTemp > DateTime.Now.Date)
