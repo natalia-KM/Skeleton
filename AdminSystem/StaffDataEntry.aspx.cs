@@ -36,9 +36,14 @@ public partial class _1_DataEntry : System.Web.UI.Page
             staff.EmployeePosition = EmployeePosition;
             staff.EmployeeSalary = Convert.ToDouble(EmployeeSalary);
             staff.EmployeeStartDate = DateTime.Parse(EmployeeStartDate);
+            staff.BonusEligible = CheckBoxBonus.Checked;
 
-            Session["staff"] = staff;
-            Response.Redirect("StaffViewer.aspx");
+
+            clsStaffCollection allStaff = new clsStaffCollection();
+            allStaff.ThisEmployee = staff;
+            allStaff.Add();
+
+            Response.Redirect("StaffList.aspx");
         } 
         else
         {

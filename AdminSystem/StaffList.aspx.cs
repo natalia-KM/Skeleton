@@ -24,4 +24,11 @@ public partial class _1_List : System.Web.UI.Page
         lstStaffList.DataTextField = "EmployeeName"; // set data field to display
         lstStaffList.DataBind();
     }
+
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        //indicate this is a new record
+        Session["EmployeeID"] = -1;
+        Response.Redirect("StaffDataEntry.aspx");
+    }
 }
