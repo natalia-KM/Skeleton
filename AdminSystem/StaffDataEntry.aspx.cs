@@ -20,16 +20,31 @@ public partial class _1_DataEntry : System.Web.UI.Page
     protected void btnOK_Click(object sender, EventArgs e)
     {
         clsStaff staff = new clsStaff();
-        staff.EmployeeID = Convert.ToInt32(txtEmployeeID.Text);
-        staff.EmployeeName = txtEmployeeName.Text;
-        staff.EmployeeEmail = txtEmployeeEmail.Text;
-        staff.EmployeePosition = txtEmployeePosition.Text;
-        staff.EmployeeSalary = Convert.ToDouble(txtEmployeeSalary.Text);
-        staff.EmployeeStartDate = DateTime.Parse(txtEmployeeStartDate.Text);
-        staff.BonusEligible = CheckBoxBonus.Checked;
+        string EmployeeName = txtEmployeeName.Text;
+        string EmployeeEmail = txtEmployeeEmail.Text;
+        string EmployeePosition = txtEmployeePosition.Text;
+        string EmployeeSalary = txtEmployeeSalary.Text;
+        string EmployeeStartDate = txtEmployeeStartDate.Text;
 
-        Session["staff"] = staff;
-        Response.Redirect("StaffViewer.aspx");
+        string Error = "";
+        Error = staff.Valid(EmployeeName, EmployeePosition, EmployeeEmail, EmployeeSalary, EmployeeStartDate);
+
+        if(Error == "")
+        {
+            staff.EmployeeName = EmployeeName;
+            staff.EmployeeEmail = EmployeeEmail;
+            staff.EmployeePosition = EmployeePosition;
+            staff.EmployeeSalary = Convert.ToDouble(EmployeeSalary);
+            staff.EmployeeStartDate = DateTime.Parse(EmployeeStartDate);
+
+            Session["staff"] = staff;
+            Response.Redirect("StaffViewer.aspx");
+        } 
+        else
+        {
+            lblError.Text = Error;
+        }
+
     }
 
     protected void btnFind_Click(object sender, EventArgs e)
