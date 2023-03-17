@@ -8,7 +8,7 @@ namespace Testing1
     public class tstOrder
     {
 
-        //good test data
+        //good test data for Order
         //create some test data to pass to the method
         string OrderDate = DateTime.Now.Date.ToString();
         string OrderCost = "402.99";
@@ -16,6 +16,8 @@ namespace Testing1
         string Notes = "Please deliver next door";
         //string Dispatched = "true";
         string OrderQuantity = "3";
+
+
         [TestMethod]
         public void InstanceOK()
         {
@@ -826,7 +828,7 @@ namespace Testing1
             //invoke the method
             Error = AnOrder.Valid(OrderDate, OrderCost, CustomerID, Notes, OrderQuantity);
             //test to see that the result is correct
-            Assert.AreEqual(Error, ""); //
+            Assert.AreEqual(Error, ""); 
         }
 
         [TestMethod]
