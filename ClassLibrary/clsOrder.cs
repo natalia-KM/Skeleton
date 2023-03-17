@@ -141,21 +141,122 @@ namespace ClassLibrary
         {
             //create a string variable to store the error
             String Error = "";
+            
+
+            // ORDER DATE
             //create a temporary variable to store date values
             DateTime DateTemp;
-            //copy the orderDate value to the DateTemp variable
-            DateTemp = Convert.ToDateTime(orderDate);
-            if (DateTemp < DateTime.Now.Date)
+            try
+            {
+                //copy the orderDate value to the DateTemp variable
+                DateTemp = Convert.ToDateTime(orderDate);
+                //check to see if the date is less than today's date
+                if (DateTemp < DateTime.Now.Date)
+                {
+                    //record the error
+                    Error += "The OrderDate cannot be in the past ; ";
+                }
+                //check to see if the date is greater than today's date
+                if (DateTemp > DateTime.Now.Date)
+                {
+                    //record the error
+                    Error += "The OrderDate cannot be in the future ; ";
+                }
+            }
+            catch
             {
                 //record the error
-                Error = Error + "The OrderDate cannot be in the past ; ";
+                Error += "The date was not a valid date : ";
             }
-            //check to see if the date is greater than today's date
-            if (DateTemp > DateTime.Now.Date)
+
+
+            // ORDER COST
+            //create a temporary variable to store decimal/double values
+            Decimal CostTemp;
+            try
+            {
+                //copy the orderCost value to the CostTemp variable
+                CostTemp = Convert.ToDecimal(orderCost);
+                if (CostTemp < 0)
+                {
+                    //record the error
+                    Error += "The OrderCost cannot be below 0.00 ; ";
+                }
+                //check to see if the decimal value is greater than the max value a decimal variable can store
+                if (CostTemp > Decimal.MaxValue)
+                {
+                    //record the error
+                    Error += "The OrderCost cannot be above the maximum value of a decimal; ";
+                }
+            }
+            catch
             {
                 //record the error
-                Error = Error + "The OrderDate cannot be in the future ; ";
+                Error = Error += "The OrderCost was not a valid amount : ";
             }
+
+
+            // CUSTOMER ID
+            //create a temporary variable to store integer value
+            Int32 CustomerIDTemp;
+            try
+            {
+                CustomerIDTemp = Convert.ToInt32(customerID);
+                //check to see if the CustomerID value is less than 1 (does it meet the minimum value)
+                if (CustomerIDTemp < 1)
+                {
+                    //record the error
+                    Error += "The CustomerID cannot be below 1 ; ";
+                }
+                //check to see if the CustomerID value is greater than the max value an integer Int32 variable can store.
+                if (CustomerIDTemp > Int32.MaxValue)
+                {
+                    //record the error
+                    Error += "The CustomerID cannot be greater than max value of an integer ; ";
+                }
+            }
+            catch
+            {
+                //record the error
+                Error += "The CustomerID is invalid or blank : ";
+            }
+
+            
+            // NOTES
+            //if the Notes variable has string contents that exceed the maximum amount of characters.
+            if (notes.Length > 80)
+            {
+                //record the error
+                Error += "Notes field has a character amount exceeding the maximum amount of 80";
+            }
+
+
+            // ORDER QUANTITY
+            //create a temporary variable to store integer value
+            Int32 OrderQuantityTemp;
+            try
+            {
+                OrderQuantityTemp = Convert.ToInt32(orderQuantity);
+                //check to see if the OrderQuantity value is less than 1 (does it meet the minimum value)
+                if (OrderQuantityTemp < 1)
+                {
+                    //record the error
+                    Error += "The OrderQuantity cannot be below 1 ; ";
+                }
+                //check to see if the CustomerID value is greater than the max value an integer Int32 variable can store.
+                if (OrderQuantityTemp > Int32.MaxValue)
+                {
+                    //record the error
+                    Error += "The OrderQuantity cannot be greater than max value of an integer ; ";
+                }
+            }
+            catch
+            {
+                //record the error
+                Error += "The OrderQuantity is invalid or blank : ";
+            }
+
+
             //return any error messages
             return Error;
         }
