@@ -813,7 +813,7 @@ namespace Testing2
             //string variable to store the error message
             String Error = "";
             //creates test data to pass the method
-            Int32 TestStock = Int32.MaxValue / 2;
+            Int32 TestStock = 0;
             string Stock = TestStock.ToString();
             //invokes the method
             Error = AStock.Valid(ProductDescription, DateAdded, Size, Type, Stock, Price);
@@ -829,7 +829,7 @@ namespace Testing2
             //string variable to store the error message
             String Error = "";
             //creates test data to pass the method
-            Int32 TestStock = Int32.MaxValue / 2;
+            Int32 TestStock = 1;
             string Stock = TestStock.ToString();
             //invokes the method
             Error = AStock.Valid(ProductDescription, DateAdded, Size, Type, Stock, Price);
@@ -845,7 +845,7 @@ namespace Testing2
             //string variable to store the error message
             String Error = "";
             //creates test data to pass the method
-            Int32 TestStock = Int32.MaxValue / 2;
+            Int32 TestStock = 2;
             string Stock = TestStock.ToString();
             //invokes the method
             Error = AStock.Valid(ProductDescription, DateAdded, Size, Type, Stock, Price);
@@ -861,7 +861,7 @@ namespace Testing2
             //string variable to store the error message
             String Error = "";
             //creates test data to pass the method
-            Int32 TestStock = Int32.MaxValue / 2;
+            Int32 TestStock = Int32.MaxValue - 1;
             string Stock = TestStock.ToString();
             //invokes the method
             Error = AStock.Valid(ProductDescription, DateAdded, Size, Type, Stock, Price);
@@ -877,7 +877,7 @@ namespace Testing2
             //string variable to store the error message
             String Error = "";
             //creates test data to pass the method
-            Int32 TestStock = Int32.MaxValue / 2;
+            Int32 TestStock = Int32.MaxValue;
             string Stock = TestStock.ToString();
             //invokes the method
             Error = AStock.Valid(ProductDescription, DateAdded, Size, Type, Stock, Price);
