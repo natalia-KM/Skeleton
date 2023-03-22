@@ -121,7 +121,123 @@ namespace ClassLibrary
 
         public string Valid(string fullName, string email, string phoneNumber, string dateOfBirth, string totalSpent)
         {
-            return "";
+            //create a string variable to store the error
+            String Error = "";
+
+            // FULL NAME TESTS
+            if (fullName.Length > 50)
+            {
+                //record the error
+                Error += "Full Name Length too large (max 50 characters)";
+            }
+            if (fullName.Length < 1)
+            {
+                //record the error
+                Error += "Full Name field cannot be blank";
+            }
+
+            // EMAIL TESTS
+            if (email.Length > 50)
+            {
+                //record the error
+                Error += "Email too large (max 50 characters)";
+            }
+            if (email.Length < 1)
+            {
+                //record the error
+                Error += "Email cannot be blank";
+            }
+            if (!email.Contains("@"))
+            {
+                if (email == "")
+                {
+                    Error += "Email cannot be blank";
+                }
+                else
+                {
+                    //record the error
+                    Error += "Email must have @ character";
+                }   
+            }
+
+            // PHONE NUMBER TESTS
+            if (phoneNumber.Length > 15)
+            {
+                //record the error
+                Error += "Phone Number too large (max 15 characters)";
+            }
+            if (phoneNumber.Length < 5)
+            {
+                //record the error
+                phoneNumber += "Invalid phone number (must be bigger than 5 characters)";
+            }
+            if (!phoneNumber.Contains("+"))
+            {
+                if (phoneNumber == "")
+                {
+                    Error += "Phone Number field cannot be blank";
+                }
+                else
+                {
+                    //record the error
+                    Error += "Phone Number must have '+' character";
+                }
+            }
+
+            // DATE OF BIRTH TESTS
+            DateTime DateOfBirthTemp;
+            try
+            {
+                DateOfBirthTemp = Convert.ToDateTime(dateOfBirth);
+                if (DateOfBirthTemp < Convert.ToDateTime("01/01/1900"))
+                {
+                    //record the error
+                    Error += "Your date of birth is not eligible";
+                }
+                if (DateOfBirthTemp > DateTime.Now.Date)
+                {
+                    //record the error
+                    Error += "Your date of birth is not eligible";
+                }
+                /*
+                if (DateTime.Now.Year - DateOfBirthTemp.Year < 14)
+                {
+                    //record the error
+                    Error += "You must be 14 or over.";
+                }
+                */
+            }
+            catch
+            {
+                Error += "Your date of birth is invalid";
+            }
+
+            // TOTAL SPENT TESTS
+            Decimal TotalSpentTemp;
+            try
+            {
+                //copy the totalSpent value to the TotalSpentTemp variable
+                TotalSpentTemp = Convert.ToDecimal(totalSpent);
+                if (TotalSpentTemp < 0)
+                {
+                    //record the error
+                    Error += "The TotalSpent field cannot be below 0.00 ; ";
+                }
+                //check to see if the decimal value is greater than the max value a decimal variable can store
+                if (TotalSpentTemp > Decimal.MaxValue)
+                {
+                    //record the error
+                    Error += "The TotalSpent field cannot be above the maximum value of a decimal; ";
+                }
+            }
+            catch
+            {
+                //record the error
+                Error = Error += "The TotalSpent entered was not a valid amount : ";
+            }
+
+            // return errors
+            return Error;
         }
     }
 }
