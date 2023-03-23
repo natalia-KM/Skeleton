@@ -128,35 +128,35 @@ namespace ClassLibrary
             if (fullName.Length > 50)
             {
                 //record the error
-                Error += "Full Name Length too large (max 50 characters)";
+                Error += "Full Name Length too large (max 50 characters)" + "<br />";
             }
             if (fullName.Length < 1)
             {
                 //record the error
-                Error += "Full Name field cannot be blank";
+                Error += "Full Name field cannot be blank" + "<br />";
             }
 
             // EMAIL TESTS
             if (email.Length > 50)
             {
                 //record the error
-                Error += "Email too large (max 50 characters)";
+                Error += "Email too large (max 50 characters)" + "<br />";
             }
             if (email.Length < 1)
             {
                 //record the error
-                Error += "Email cannot be blank";
+                Error += "Email cannot be blank" + "<br />";
             }
             if (!email.Contains("@"))
             {
                 if (email == "")
                 {
-                    Error += "Email cannot be blank";
+                    Error += "Email cannot be blank" + "<br />";
                 }
                 else
                 {
                     //record the error
-                    Error += "Email must have @ character";
+                    Error += "Email must have @ character" + "<br />";
                 }   
             }
 
@@ -164,23 +164,23 @@ namespace ClassLibrary
             if (phoneNumber.Length > 15)
             {
                 //record the error
-                Error += "Phone Number too large (max 15 characters)";
+                Error += "Phone Number too large (max 15 characters)" + "<br />";
             }
             if (phoneNumber.Length < 5)
             {
                 //record the error
-                phoneNumber += "Invalid phone number (must be bigger than 5 characters)";
+                phoneNumber += "Invalid phone number (must be bigger than 5 characters)" + "<br />";
             }
             if (!phoneNumber.Contains("+"))
             {
                 if (phoneNumber == "")
                 {
-                    Error += "Phone Number field cannot be blank";
+                    Error += "Phone Number field cannot be blank" + "<br />";
                 }
                 else
                 {
                     //record the error
-                    Error += "Phone Number must have '+' character";
+                    Error += "Phone Number must have '+' character" + "<br />";
                 }
             }
 
@@ -192,12 +192,12 @@ namespace ClassLibrary
                 if (DateOfBirthTemp < Convert.ToDateTime("01/01/1900"))
                 {
                     //record the error
-                    Error += "Your date of birth is not eligible";
+                    Error += "Your date of birth is not eligible" + "<br />";
                 }
                 if (DateOfBirthTemp > DateTime.Now.Date)
                 {
                     //record the error
-                    Error += "Your date of birth is not eligible";
+                    Error += "Your date of birth is not eligible" + "<br />";
                 }
                 /*
                 if (DateTime.Now.Year - DateOfBirthTemp.Year < 14)
@@ -209,7 +209,7 @@ namespace ClassLibrary
             }
             catch
             {
-                Error += "Your date of birth is invalid";
+                Error += "Your date of birth is invalid" + "<br />";
             }
 
             // TOTAL SPENT TESTS
@@ -221,19 +221,19 @@ namespace ClassLibrary
                 if (TotalSpentTemp < 0)
                 {
                     //record the error
-                    Error += "The TotalSpent field cannot be below 0.00 ; ";
+                    Error += "The TotalSpent field cannot be below 0.00" + "<br />";
                 }
                 //check to see if the decimal value is greater than the max value a decimal variable can store
                 if (TotalSpentTemp > Decimal.MaxValue)
                 {
                     //record the error
-                    Error += "The TotalSpent field cannot be above the maximum value of a decimal; ";
+                    Error += "The TotalSpent field cannot be above the maximum value of a decimal" + "<br />";
                 }
             }
             catch
             {
                 //record the error
-                Error = Error += "The TotalSpent entered was not a valid amount : ";
+                Error = Error += "The TotalSpent entered was not a valid amount" + "<br />";
             }
 
             // return errors

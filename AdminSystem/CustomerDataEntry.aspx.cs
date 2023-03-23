@@ -16,15 +16,40 @@ public partial class _1_DataEntry : System.Web.UI.Page
     protected void btnOK_Click(object sender, EventArgs e)
     {
         clsCustomer ACustomer = new clsCustomer();
-        ACustomer.CustomerID = Convert.ToInt32(txtCustomerID.Text);
-        ACustomer.FullName = txtFullName.Text;
-        ACustomer.Email = txtEmail.Text;
-        ACustomer.PhoneNumber = txtPhoneNumber.Text;
-        ACustomer.DateOfBirth = Convert.ToDateTime(txtDateOfBirth.Text);
-        ACustomer.TotalSpent = Convert.ToDouble(txtTotalSpent.Text);
-        ACustomer.PaymentDataAdded = chkPaymentDataAdded.Checked;
-        Session["ACustomer"] = ACustomer;
-        Response.Redirect("CustomerViewer.aspx");
+        // capturing the data
+        string FullName = txtFullName.Text;
+        string Email = txtEmail.Text;
+        string PhoneNumber = txtPhoneNumber.Text;
+        string DateOfBirth = txtDateOfBirth.Text;
+        string TotalSpent = txtTotalSpent.Text;
+        // variable to store any error messages
+        string Error = "";
+        // Validate the data
+        Error = ACustomer.Valid(FullName, Email, PhoneNumber, DateOfBirth, TotalSpent);
+        if (Convert.ToDateTime(DateOfBirth).Year < DateTime.Now.Year)
+        {
+            if (DateTime.Now.Year - Convert.ToDateTime(DateOfBirth).Year < 14)
+            {
+                //record the error
+                Error += "You must be 14 or over." + "<br />";
+            }
+        }
+        if (Error == "")
+        {
+            ACustomer.CustomerID = Convert.ToInt32(txtCustomerID.Text);
+            ACustomer.FullName = txtFullName.Text;
+            ACustomer.Email = txtEmail.Text;
+            ACustomer.PhoneNumber = txtPhoneNumber.Text;
+            ACustomer.DateOfBirth = Convert.ToDateTime(txtDateOfBirth.Text);
+            ACustomer.TotalSpent = Convert.ToDouble(txtTotalSpent.Text);
+            ACustomer.PaymentDataAdded = chkPaymentDataAdded.Checked;
+            Session["ACustomer"] = ACustomer;
+            Response.Redirect("CustomerViewer.aspx");
+        }
+        else
+        {
+            lblError.Text = Error;
+        }
 
     }
 

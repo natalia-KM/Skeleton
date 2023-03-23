@@ -32,7 +32,7 @@
         <p>
             <asp:CheckBox ID="chkPaymentDataAdded" runat="server" Text="Payment Data Added" />
         </p>
-        <asp:Label ID="lblError" runat="server"></asp:Label>
+        <asp:Label ID="lblError" runat="server" ForeColor="#FF3300"></asp:Label>
         <p>
             <asp:Button ID="btnOK" runat="server" OnClick="btnOK_Click" Text="OK" />
             <asp:Button ID="btnCancel" runat="server" style="margin-left: 61px" Text="Cancel" />
