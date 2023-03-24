@@ -47,18 +47,21 @@ namespace Testing1
             Assert.AreEqual(AllOrders.OrderList, TestList);
         }
 
+        /* REDUNDANT TEST
+         * 
         [TestMethod]
         public void CountPropertyOK()
         {
             //create an instance of the class we want to create
             clsOrderCollection AllOrders = new clsOrderCollection();
             //create some test data to assign to the property
-            Int32 SomeCount = 0;
+            Int32 SomeCount = 2;
             //assign the data to the property
             AllOrders.Count = SomeCount;
             //test to see that the two values are the same
             Assert.AreEqual(AllOrders.Count, SomeCount);
         }
+        */
 
         [TestMethod]
         public void ThisAddressPropertyOK()
@@ -108,5 +111,17 @@ namespace Testing1
             //test to see that the two values are the same
             Assert.AreEqual(AllOrders.Count, TestList.Count);
         }
+
+        /* REDUNDANT TEST
+         * 
+        [TestMethod]
+        public void TwoRecordsPresent()
+        {
+            //create an instance of the class we want to create
+            clsOrderCollection AllOrders = new clsOrderCollection();
+            //test to see that the two values are the same
+            Assert.AreEqual(AllOrders.Count, 2);
+        }
+        */
     }
 }
