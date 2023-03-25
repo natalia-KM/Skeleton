@@ -14,6 +14,7 @@ public partial class _1_List : System.Web.UI.Page
         {
             //update the list box
             DisplayOrders();
+            DisplayOrderLines();
         }
     }
 
@@ -29,5 +30,18 @@ public partial class _1_List : System.Web.UI.Page
         lstOrderList.DataTextField = "OrderDate";
         //bind the data to the list
         lstOrderList.DataBind();
+    }
+    void DisplayOrderLines()
+    {
+        //create an instance of the OrderLine collection class
+        clsOrderLineCollection OrderLines = new clsOrderLineCollection();
+        //set the data source to list of OrderLines in the collection
+        lstOrderLineList.DataSource = OrderLines.OrderLineList;
+        //set the name of the primary key
+        lstOrderLineList.DataValueField = "OrderLineNo";
+        //set the data field to display
+        lstOrderLineList.DataTextField = "OrderID";
+        //bind the data to the list
+        lstOrderLineList.DataBind();
     }
 }

@@ -53,7 +53,7 @@ namespace ClassLibrary
             //while there are records to process
             while (Index < RecordCount) // starts from index 0 which is row 0, that's the first row.
             {
-                //create a blank address
+                //create a blank Order object
                 clsOrder AnOrder = new clsOrder();
                 //read in the fields from the current record
                 AnOrder.OrderID = Convert.ToInt32(DB.DataTable.Rows[Index]["OrderID"]);
