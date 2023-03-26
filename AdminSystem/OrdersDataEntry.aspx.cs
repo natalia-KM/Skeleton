@@ -42,10 +42,14 @@ public partial class _1_DataEntry : System.Web.UI.Page
             AnOrder.Notes = txtNotes.Text;
             AnOrder.Dispatched = chkDispatched.Checked;
             AnOrder.OrderQuantity = Convert.ToInt32(txtOrderQuantity.Text);
-            // Store the order obj in the session object
-            Session["AnOrder"] = AnOrder;
-            // Navigate to the viewer page
-            Response.Redirect("OrdersViewer.aspx");
+            //create a new instance of the Order collection
+            clsOrderCollection OrderList = new clsOrderCollection();
+            //set the ThisOrder property
+            OrderList.ThisOrder = AnOrder;
+            //add the new record
+            OrderList.Add();
+            //redirect back to the list page
+            Response.Redirect("OrdersList.aspx");
         }
         else
         {
