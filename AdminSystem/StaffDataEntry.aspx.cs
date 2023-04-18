@@ -8,9 +8,39 @@ using ClassLibrary;
 
 public partial class _1_DataEntry : System.Web.UI.Page
 {
+    Int32 EmployeeID;
     protected void Page_Load(object sender, EventArgs e)
     {
+        EmployeeID = Convert.ToInt32(Session["EmployeeID"]);
+ 
+        if (IsPostBack == false)
+        {
+            if(EmployeeID != -1)
+            {
+                DisplayStaff();
+            }
+        }
     }
+
+
+    void DisplayStaff()
+    {
+        clsStaff staff = new clsStaff();
+        txtEmployeeID.Text = EmployeeID.ToString();
+  
+        staff.Find(EmployeeID);
+
+        
+            txtEmployeeID.Text = Convert.ToString(staff.EmployeeID);
+            txtEmployeeName.Text = staff.EmployeeName;
+            txtEmployeePosition.Text = staff.EmployeePosition;
+            txtEmployeeEmail.Text = staff.EmployeeEmail;
+            txtEmployeeStartDate.Text = staff.EmployeeStartDate.ToString();
+            txtEmployeeSalary.Text = staff.EmployeeSalary.ToString();
+            CheckBoxBonus.Checked = staff.BonusEligible;
+
+        }
+    
 
     protected void CheckBox1_CheckedChanged(object sender, EventArgs e)
     {
@@ -31,6 +61,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
         if(Error == "")
         {
+            staff.EmployeeID = EmployeeID;
             staff.EmployeeName = EmployeeName;
             staff.EmployeeEmail = EmployeeEmail;
             staff.EmployeePosition = EmployeePosition;
@@ -40,8 +71,18 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
 
             clsStaffCollection allStaff = new clsStaffCollection();
-            allStaff.ThisEmployee = staff;
-            allStaff.Add();
+
+            if(EmployeeID == -1)
+            {
+                allStaff.ThisEmployee = staff;
+                allStaff.Add();
+            } else
+            {
+                allStaff.ThisEmployee.Find(EmployeeID);
+                allStaff.ThisEmployee = staff;
+                allStaff.Update();
+            }
+           
 
             Response.Redirect("StaffList.aspx");
         } 
@@ -57,19 +98,23 @@ public partial class _1_DataEntry : System.Web.UI.Page
         clsStaff staff = new clsStaff();
         Int32 EmployeeID;
         Boolean Found = false;
-        EmployeeID = Convert.ToInt32(txtEmployeeID.Text);
-        Found = staff.Find(EmployeeID);
-
-        if(Found == true)
+        if (txtEmployeeID.Text.Length != 0)
         {
-            txtEmployeeID.Text = Convert.ToString(staff.EmployeeID);
-            txtEmployeeName.Text = staff.EmployeeName;
-            txtEmployeePosition.Text = staff.EmployeePosition;
-            txtEmployeeEmail.Text = staff.EmployeeEmail;
-            txtEmployeeStartDate.Text = staff.EmployeeStartDate.ToString();
-            txtEmployeeSalary.Text = staff.EmployeeSalary.ToString();
-            CheckBoxBonus.Checked = staff.BonusEligible;
 
+            EmployeeID = Convert.ToInt32(txtEmployeeID.Text);
+            Found = staff.Find(EmployeeID);
+
+            if (Found == true)
+            {
+                txtEmployeeID.Text = Convert.ToString(staff.EmployeeID);
+                txtEmployeeName.Text = staff.EmployeeName;
+                txtEmployeePosition.Text = staff.EmployeePosition;
+                txtEmployeeEmail.Text = staff.EmployeeEmail;
+                txtEmployeeStartDate.Text = staff.EmployeeStartDate.ToString();
+                txtEmployeeSalary.Text = staff.EmployeeSalary.ToString();
+                CheckBoxBonus.Checked = staff.BonusEligible;
+
+            }
         }
     }
 

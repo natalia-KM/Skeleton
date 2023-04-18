@@ -87,5 +87,29 @@ namespace ClassLibrary
 
             return DB.Execute("sproc_tblStaff_Insert");
         }
+
+        public void Update()
+        {
+            clsDataConnection DB = new clsDataConnection();
+
+            DB.AddParameter("@EmployeeID", mThisEmployee.EmployeeID);
+            DB.AddParameter("@EmployeeName", mThisEmployee.EmployeeName);
+            DB.AddParameter("@EmployeePosition", mThisEmployee.EmployeePosition);
+            DB.AddParameter("@EmployeeEmail", mThisEmployee.EmployeeEmail);
+            DB.AddParameter("@EmployeeStartDate", mThisEmployee.EmployeeStartDate);
+            DB.AddParameter("@EmployeeSalary", mThisEmployee.EmployeeSalary);
+            DB.AddParameter("@BonusEligible", mThisEmployee.BonusEligible);
+
+            DB.Execute("sproc_tblStaff_Update");
+        }
+
+        public void Delete()
+        {
+            clsDataConnection DB = new clsDataConnection();
+
+            DB.AddParameter("@EmployeeID", mThisEmployee.EmployeeID);
+
+            DB.Execute("sproc_tblStaff_Delete");
+        }
     }
 }

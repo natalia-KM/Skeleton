@@ -10,9 +10,11 @@ public partial class _1_List : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+
         if(IsPostBack == false)
         {
-            DisplayStaff();
+                DisplayStaff();
+   
         }
     }
 
@@ -30,5 +32,35 @@ public partial class _1_List : System.Web.UI.Page
         //indicate this is a new record
         Session["EmployeeID"] = -1;
         Response.Redirect("StaffDataEntry.aspx");
+    }
+
+    protected void btnEdit_Click(object sender, EventArgs e)
+    {
+        Int32 EmployeeID;
+
+        if(lstStaffList.SelectedIndex!=-1)
+        {
+            EmployeeID = Convert.ToInt32(lstStaffList.SelectedValue);
+            Session["EmployeeID"] = EmployeeID;
+            Response.Redirect("StaffDataEntry.aspx");
+        } else
+        {
+            lblError.Text = "Please select a record to edit from the list";
+        }
+    }
+
+    protected void btnDelete_Click(object sender, EventArgs e)
+    {
+        Int32 EmployeeID;
+
+        if(lstStaffList.SelectedIndex != -1)
+        {
+            EmployeeID = Convert.ToInt32(lstStaffList.SelectedValue);
+            Session["EmployeeID"] = EmployeeID;
+            Response.Redirect("StaffConfirmDelete.aspx");
+        } else
+        {
+            lblError.Text = "Please select a record to delete from the list";
+        }
     }
 }
