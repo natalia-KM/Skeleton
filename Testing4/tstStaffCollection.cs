@@ -108,5 +108,41 @@ namespace Testing4
             Assert.AreEqual(allStaff.ThisEmployee, staff);
 
         }
+
+
+        [TestMethod]
+        public void UpdateMethodOK()
+        {
+            clsStaffCollection allStaff = new clsStaffCollection();
+            clsStaff staff = new clsStaff();
+            Int32 PrimaryKey = 0;
+
+            staff.BonusEligible = true;
+            staff.EmployeeID = 1;
+            staff.EmployeeName = "Soto";
+            staff.EmployeePosition = "Manager";
+            staff.EmployeeEmail = "soto@twentythree.com";
+            staff.EmployeeSalary = 23000.0;
+            staff.EmployeeStartDate = DateTime.Parse("23/02/2023");
+
+            allStaff.ThisEmployee = staff;
+            PrimaryKey = allStaff.Add();
+            staff.EmployeeID = PrimaryKey;
+
+            staff.BonusEligible = false;
+            staff.EmployeeID = 3;
+            staff.EmployeeName = "Sots";
+            staff.EmployeePosition = "Menager";
+            staff.EmployeeEmail = "sotos@twentythree.com";
+            staff.EmployeeSalary = 24000.0;
+            staff.EmployeeStartDate = DateTime.Parse("25/02/2023");
+
+            allStaff.ThisEmployee = staff;
+            allStaff.Update();
+            allStaff.ThisEmployee.Find(PrimaryKey);
+
+            Assert.AreEqual(allStaff.ThisEmployee, staff);
+
+        }
     }
 }
