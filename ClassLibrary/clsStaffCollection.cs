@@ -88,7 +88,7 @@ namespace ClassLibrary
             return DB.Execute("sproc_tblStaff_Insert");
         }
 
-        public int Update()
+        public void Update()
         {
             clsDataConnection DB = new clsDataConnection();
 
@@ -100,7 +100,7 @@ namespace ClassLibrary
             DB.AddParameter("@EmployeeSalary", mThisEmployee.EmployeeSalary);
             DB.AddParameter("@BonusEligible", mThisEmployee.BonusEligible);
 
-            return DB.Execute("sproc_tblStaff_Update");
+            DB.Execute("sproc_tblStaff_Update");
         }
     }
 }
