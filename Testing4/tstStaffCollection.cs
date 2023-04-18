@@ -172,5 +172,47 @@ namespace Testing4
             Assert.IsFalse(Found);
 
         }
+
+        [TestMethod]
+        public void ReportByNameMethodOK()
+        {
+            clsStaffCollection allStaff = new clsStaffCollection();
+            clsStaffCollection filteredStaff = new clsStaffCollection();
+            filteredStaff.ReportByName("");
+            Assert.AreEqual(allStaff.Count, filteredStaff.Count);
+        }
+
+        [TestMethod]
+        public void ReportByNameNoneFound()
+        {
+            clsStaffCollection filteredStaff = new clsStaffCollection();
+            filteredStaff.ReportByName("yyy yy");
+            Assert.AreEqual(0, filteredStaff.Count);
+        }
+
+        [TestMethod]
+        public void ReportByNameTestDataFound()
+        {
+            clsStaffCollection filteredStaff = new clsStaffCollection();
+            Boolean OK = true;
+            filteredStaff.ReportByName("xxx xx");
+
+            if(filteredStaff.Count==2)
+            {
+                if(filteredStaff.StaffList[0].EmployeeID!=44)
+                {
+                    OK = false;
+                }
+                if (filteredStaff.StaffList[1].EmployeeID != 45)
+                {
+                    OK = false;
+                }
+            }
+            else
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
     }
 }
