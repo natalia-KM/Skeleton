@@ -13,29 +13,11 @@ namespace ClassLibrary
 
         public clsStaffCollection()
         {
-            Int32 Index = 0;
-            Int32 RecordCount = 0;
+            
             clsDataConnection DB = new clsDataConnection();
-
             DB.Execute("sproc_tblStaff_SelectAll");
-            RecordCount = DB.Count;
+            PopulateArray(DB);
 
-            while(Index<RecordCount)
-            {
-                clsStaff staff = new clsStaff();
-
-                staff.EmployeeID = Convert.ToInt32(DB.DataTable.Rows[Index]["EmployeeID"]);
-                staff.EmployeeName = Convert.ToString(DB.DataTable.Rows[Index]["EmployeeName"]);
-                staff.EmployeePosition = Convert.ToString(DB.DataTable.Rows[Index]["EmployeePosition"]);
-                staff.EmployeeEmail = Convert.ToString(DB.DataTable.Rows[Index]["EmployeeEmail"]);
-                staff.EmployeeSalary = Convert.ToDouble(DB.DataTable.Rows[Index]["EmployeeSalary"]);
-                staff.EmployeeStartDate = Convert.ToDateTime(DB.DataTable.Rows[Index]["EmployeeStartDate"]);
-                staff.BonusEligible = Convert.ToBoolean(DB.DataTable.Rows[Index]["BonusEligible"]);
-
-                mStaffList.Add(staff);
-
-                Index++;
-            }
         }
 
 
@@ -110,6 +92,39 @@ namespace ClassLibrary
             DB.AddParameter("@EmployeeID", mThisEmployee.EmployeeID);
 
             DB.Execute("sproc_tblStaff_Delete");
+        }
+
+        public void ReportByName(string Name)
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@EmployeeName", Name);
+            DB.Execute("sproc_tblStaff_FilterByName");
+            PopulateArray(DB);
+        }
+
+        void PopulateArray(clsDataConnection DB)
+        {
+            Int32 Index = 0;
+            Int32 RecordCount;
+            RecordCount = DB.Count;
+            mStaffList = new List<clsStaff>();
+
+            while(Index < RecordCount)
+            {
+                clsStaff staff = new clsStaff();
+
+                staff.EmployeeID = Convert.ToInt32(DB.DataTable.Rows[Index]["EmployeeID"]);
+                staff.EmployeeName = Convert.ToString(DB.DataTable.Rows[Index]["EmployeeName"]);
+                staff.EmployeePosition = Convert.ToString(DB.DataTable.Rows[Index]["EmployeePosition"]);
+                staff.EmployeeEmail = Convert.ToString(DB.DataTable.Rows[Index]["EmployeeEmail"]);
+                staff.EmployeeSalary = Convert.ToDouble(DB.DataTable.Rows[Index]["EmployeeSalary"]);
+                staff.EmployeeStartDate = Convert.ToDateTime(DB.DataTable.Rows[Index]["EmployeeStartDate"]);
+                staff.BonusEligible = Convert.ToBoolean(DB.DataTable.Rows[Index]["BonusEligible"]);
+
+                mStaffList.Add(staff);
+
+                Index++;
+            }
         }
     }
 }
