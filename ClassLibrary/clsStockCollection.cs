@@ -40,6 +40,8 @@ namespace ClassLibrary
 
         //private data meember for the list
         List<clsStock> mStockList = new List<clsStock>();
+        //creates a new instance for the private data member
+        clsStock mThisStock = new clsStock();
         //public property for StockList
         public List<clsStock> StockList
         {
@@ -70,6 +72,50 @@ namespace ClassLibrary
         }
 
         //public property for ThisStock
-        public clsStock ThisStock;
+        public clsStock ThisStock
+        {
+            get
+            {
+                //return the private data
+                return mThisStock;
+            }
+            set
+            {
+                //set the private data
+                mThisStock = value;
+            }
+        }
+
+        public int Add()
+        {
+            //adds a new record to the database based on the values of ThisStock
+            //connects to the database
+            clsDataConnection DB = new clsDataConnection();
+            //set the parameters for the stored prcedure
+            DB.AddParameter("@ProductDescription", mThisStock.ProductDescription);
+            DB.AddParameter("@DateAdded", mThisStock.DateAdded);
+            DB.AddParameter("@Size", mThisStock.Size);
+            DB.AddParameter("@Type", mThisStock.Type);
+            DB.AddParameter("@Stock", mThisStock.Stock);
+            DB.AddParameter("@Price", mThisStock.Price);
+            //execute the query returning the primary key value
+            return DB.Execute("sproc_tblProducts_Insert");
+        }
+
+        public void Update()
+        {
+            //update an existing record based on the values of thisStock
+            //connects to the database
+            clsDataConnection DB = new clsDataConnection();
+            //set the parameters for the stored prcedure
+            DB.AddParameter("@ProductDescription", mThisStock.ProductDescription);
+            DB.AddParameter("@DateAdded", mThisStock.DateAdded);
+            DB.AddParameter("@Size", mThisStock.Size);
+            DB.AddParameter("@Type", mThisStock.Type);
+            DB.AddParameter("@Stock", mThisStock.Stock);
+            DB.AddParameter("@Price", mThisStock.Price);
+            //execute the stored procedure
+            DB.Execute("sproc_tblProducts_Update");
+        }
     }
 }

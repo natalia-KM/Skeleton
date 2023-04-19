@@ -8,10 +8,13 @@ using ClassLibrary;
 
 public partial class _1_DataEntry : System.Web.UI.Page
 {
+    //variable to store the primary key with page level scope
+    Int32 ProductNo;
     protected void Page_Load(object sender, EventArgs e)
     {
 
     }
+
 
     protected void btnOK_Click(object sender, EventArgs e)
     {
@@ -32,18 +35,38 @@ public partial class _1_DataEntry : System.Web.UI.Page
         if(Error == "")
         {
             //captures the input from all textboxes
-            AStock.ProductNo = Convert.ToInt32(txtProductNo.Text);
-            AStock.ProductDescription = txtProductDescription.Text;
-            AStock.DateAdded = Convert.ToDateTime(txtDateAdded.Text);
-            AStock.Size = txtSize.Text;
-            AStock.Type = txtType.Text;
-            AStock.Stock = Convert.ToInt32(txtStock.Text);
-            AStock.Price = Convert.ToDouble(txtPrice.Text);
+            AStock.ProductNo = ProductNo;
+            AStock.ProductDescription = ProductDescription;
+            AStock.DateAdded = Convert.ToDateTime(DateAdded);
+            AStock.Size = Size;
+            AStock.Type = Type;
+            AStock.Stock = Convert.ToInt32(Stock);
+            AStock.Price = Convert.ToDouble(Price);
 
-            //store the stock in the session object
-            Session["AStock"] = AStock;
-            //redirects you to the 'StockViewer' page
-            Response.Redirect("StockViewer.aspx");
+            //creates a new instance of the stock collection
+            clsStockCollection StockList = new clsStockCollection();
+            
+            //if this is a new record it will add the data
+            if (ProductNo == -1)
+            {
+                //set the ThisStock property
+                StockList.ThisStock = AStock;
+                //add the new record
+                StockList.Add();
+            }
+            //else if must be an update
+            else
+            {
+                //find the record to update
+                StockList.ThisStock.Find(ProductNo);
+                //set the ThisStock property
+                StockList.ThisStock = AStock;
+                //updates the record
+                StockList.Update();
+            }
+      
+            //redirects you to the 'StockList' page
+            Response.Redirect("StockList.aspx");
         }
         else
         {
@@ -81,5 +104,10 @@ public partial class _1_DataEntry : System.Web.UI.Page
             txtStock.Text = Stock.Stock.ToString();
             txtPrice.Text = Stock.Price.ToString();
         }
+    }
+
+    protected void btnCancel_Click(object sender, EventArgs e)
+    {
+
     }
 }
