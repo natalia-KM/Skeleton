@@ -27,7 +27,6 @@ namespace Testing2
             //adds an item to the list
             clsStock TestItem = new clsStock();
             //sets the properties
-            TestItem.Active = true;
             TestItem.ProductNo = 3;
             TestItem.ProductDescription = "Adidas Shoes";
             TestItem.DateAdded = DateTime.Now.Date;
@@ -51,7 +50,6 @@ namespace Testing2
             //creates test data to assign to the property
             clsStock TestStock = new clsStock();
             //sets the properties
-            TestStock.Active = true;
             TestStock.ProductNo = 3;
             TestStock.ProductDescription = "Adidas Shoes";
             TestStock.DateAdded = DateTime.Now.Date;
@@ -75,7 +73,6 @@ namespace Testing2
             //adds an item to the list
             clsStock TestItem = new clsStock();
             //sets the properties
-            TestItem.Active = true;
             TestItem.ProductNo = 3;
             TestItem.ProductDescription = "Adidas Shoes";
             TestItem.DateAdded = DateTime.Now.Date;
@@ -89,6 +86,74 @@ namespace Testing2
             AllStock.StockList = TestList;
             //tests to see if the two values are the same
             Assert.AreEqual(AllStock.Count, TestList.Count);
+        }
+
+        [TestMethod]
+        public void AddMethodOK()
+        {
+            //create an instance of the class
+            clsStockCollection AllStock = new clsStockCollection();
+            //creates a variable TestItem to store test data
+            clsStock TestItem = new clsStock();
+            //variable to store the primary key
+            Int32 PrimaryKey = 0;
+            //sets the properties for TestItem
+            TestItem.ProductNo = 3;
+            TestItem.ProductDescription = "Adidas Shoes";
+            TestItem.DateAdded = DateTime.Now.Date;
+            TestItem.Size = "7";
+            TestItem.Type = "Shoes";
+            TestItem.Stock = 50;
+            TestItem.Price = 5.5;
+            //set ThisStock to the test data
+            AllStock.ThisStock = TestItem;
+            //add the record
+            PrimaryKey = AllStock.Add();
+            //set the primary key of the test data
+            TestItem.ProductNo = PrimaryKey;
+            //find the record
+            AllStock.ThisStock.Find(PrimaryKey);
+            //tests to see if the two values are the same
+            Assert.AreEqual(AllStock.ThisStock, TestItem);
+        }
+
+        [TestMethod]
+        public void UpdateMethodOK()
+        {
+            //create an instance of the class
+            clsStockCollection AllStock = new clsStockCollection();
+            //creates a variable TestItem to store test data
+            clsStock TestItem = new clsStock();
+            //variable to store the primary key
+            Int32 PrimaryKey = 0;
+            //sets the properties for TestItem
+            TestItem.ProductDescription = "Adidas Shoes";
+            TestItem.DateAdded = DateTime.Now.Date;
+            TestItem.Size = "7";
+            TestItem.Type = "Shoes";
+            TestItem.Stock = 50;
+            TestItem.Price = 5.5;
+            //set ThisStock to the test data
+            AllStock.ThisStock = TestItem;
+            //add the record
+            PrimaryKey = AllStock.Add();
+            //set the primary key of the test data
+            TestItem.ProductNo = PrimaryKey;
+            //modifing the test data
+            TestItem.ProductDescription = "Nike Jersey";
+            TestItem.DateAdded = DateTime.Now.Date;
+            TestItem.Size = "XXL";
+            TestItem.Type = "Jersey";
+            TestItem.Stock = 20;
+            TestItem.Price = 120.0;
+            //set the record based on the new test data
+            AllStock.ThisStock = TestItem;
+            //update the record
+            AllStock.Update();
+            //find the record
+            AllStock.ThisStock.Find(PrimaryKey);
+            //test to see if the two values are the same
+            Assert.AreEqual(AllStock.ThisStock, TestItem);
         }
     }
 }
