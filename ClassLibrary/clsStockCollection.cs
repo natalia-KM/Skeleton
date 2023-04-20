@@ -7,34 +7,12 @@ namespace ClassLibrary
     {
         public clsStockCollection()
         {
-            //variable to stores the index
-            Int32 Index = 0;
-            //variable to store the record count
-            Int32 RecordCount = 0;
             //object for data connection
             clsDataConnection DB = new clsDataConnection();
             //execute the stored procedure
             DB.Execute("sproc_tblProducts_SelectAll");
-            //get the count of records
-            RecordCount = DB.Count;
-            //while loop for the records to process
-            while (Index < RecordCount)
-            {
-                //creates a new instance of clsStock
-                clsStock Stock = new clsStock();
-                //read in the fields from the current record
-                Stock.ProductNo = Convert.ToInt32(DB.DataTable.Rows[Index]["ProductNo"]);
-                Stock.ProductDescription = Convert.ToString(DB.DataTable.Rows[Index]["ProductDescription"]);
-                Stock.DateAdded = Convert.ToDateTime(DB.DataTable.Rows[Index]["DateAdded"]);
-                Stock.Size = Convert.ToString(DB.DataTable.Rows[Index]["Size"]);
-                Stock.Type = Convert.ToString(DB.DataTable.Rows[Index]["Type"]);
-                Stock.Stock = Convert.ToInt32(DB.DataTable.Rows[Index]["Stock"]);
-                Stock.Price = Convert.ToDouble(DB.DataTable.Rows[Index]["Price"]);
-                //add the record to the private data member
-                mStockList.Add(Stock);
-                //increments to go to the next record
-                Index++;          
-            }
+            //populate the array list with the data table
+            PopulateArray(DB);
         }
 
 
@@ -67,7 +45,7 @@ namespace ClassLibrary
             }
             set
             {
-                //...   
+
             }
         }
 
@@ -108,6 +86,7 @@ namespace ClassLibrary
             //connects to the database
             clsDataConnection DB = new clsDataConnection();
             //set the parameters for the stored prcedure
+            DB.AddParameter("@ProductNo", mThisStock.ProductNo);
             DB.AddParameter("@ProductDescription", mThisStock.ProductDescription);
             DB.AddParameter("@DateAdded", mThisStock.DateAdded);
             DB.AddParameter("@Size", mThisStock.Size);
@@ -116,6 +95,61 @@ namespace ClassLibrary
             DB.AddParameter("@Price", mThisStock.Price);
             //execute the stored procedure
             DB.Execute("sproc_tblProducts_Update");
+        }
+
+        public void Delete()
+        {
+            //deletes the record provided by thisStock
+            //connects to the database
+            clsDataConnection DB = new clsDataConnection();
+            //set the parameters for the stored procedure
+            DB.AddParameter("@ProductNo", mThisStock.ProductNo);
+            //execute the stored procedure
+            DB.Execute("sproc_tblProducts_Delete");
+        }
+
+        public void ReportByType(string Type)
+        {
+            //filters the records based on the type
+            //connects to the database
+            clsDataConnection DB = new clsDataConnection();
+            //send the Type parameter to the database
+            DB.AddParameter("@Type", Type);
+            //execute the stored procedure
+            DB.Execute("sproc_tblProducts_FilterByType");
+            //populate the arraylist with the data table
+            PopulateArray(DB);
+        }
+
+        void PopulateArray(clsDataConnection DB)
+        {
+            //populates the array list basd on the data table in the parameter DB
+            //variable to stores the index
+            Int32 Index = 0;
+            //variable to store the record count
+            Int32 RecordCount;
+            //get the count of records
+            RecordCount = DB.Count;
+            //clear the private array list
+            mStockList = new List<clsStock>();
+            //while loop for the records to process
+            while (Index < RecordCount)
+            {
+                //creates a new instance of clsStock
+                clsStock Stock = new clsStock();
+                //read in the fields from the current record
+                Stock.ProductNo = Convert.ToInt32(DB.DataTable.Rows[Index]["ProductNo"]);
+                Stock.ProductDescription = Convert.ToString(DB.DataTable.Rows[Index]["ProductDescription"]);
+                Stock.DateAdded = Convert.ToDateTime(DB.DataTable.Rows[Index]["DateAdded"]);
+                Stock.Size = Convert.ToString(DB.DataTable.Rows[Index]["Size"]);
+                Stock.Type = Convert.ToString(DB.DataTable.Rows[Index]["Type"]);
+                Stock.Stock = Convert.ToInt32(DB.DataTable.Rows[Index]["Stock"]);
+                Stock.Price = Convert.ToDouble(DB.DataTable.Rows[Index]["Price"]);
+                //add the record to the private data member
+                mStockList.Add(Stock);
+                //increments to go to the next record
+                Index++;
+            }
         }
     }
 }

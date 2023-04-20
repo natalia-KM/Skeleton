@@ -140,10 +140,10 @@ namespace Testing2
             //set the primary key of the test data
             TestItem.ProductNo = PrimaryKey;
             //modifing the test data
-            TestItem.ProductDescription = "Nike Jersey";
+            TestItem.ProductDescription = "some other shoes";
             TestItem.DateAdded = DateTime.Now.Date;
-            TestItem.Size = "XXL";
-            TestItem.Type = "Jersey";
+            TestItem.Size = "4";
+            TestItem.Type = "Shoes";
             TestItem.Stock = 20;
             TestItem.Price = 120.0;
             //set the record based on the new test data
@@ -155,7 +155,7 @@ namespace Testing2
             //test to see if the two values are the same
             Assert.AreEqual(AllStock.ThisStock, TestItem);
         }
-    /*
+    
         [TestMethod]
         public void DeleteMethodOK()
         {
@@ -186,6 +186,66 @@ namespace Testing2
             Boolean Found = AllStock.ThisStock.Find(PrimaryKey);
             //test to see if the record was not found
             Assert.IsFalse(Found);
-        } */
+        }
+
+        [TestMethod]
+        public void ReportByTypeOK()
+        {
+            //create an instance of the class containing unfiltered results
+            clsStockCollection AllStock = new clsStockCollection();
+            //create an instance of the filtered data
+            clsStockCollection FilteredStock = new clsStockCollection();
+            //apply a blank string, this will return all the records
+            FilteredStock.ReportByType("");
+            //test to see that the two values are the same
+            Assert.AreEqual(AllStock.Count, FilteredStock.Count);
+        }
+
+        [TestMethod]
+        public void ReportByTypeNoneFound()
+        {
+            //create an instance of the filtered data
+            clsStockCollection FilteredStock = new clsStockCollection();
+            //apply a blank string, this will return all the records
+            FilteredStock.ReportByType("skateboard");
+            //test to see that the two values are the same
+            Assert.AreEqual(0, FilteredStock.Count);
+        }
+
+        [TestMethod]
+        public void ReportByTypeTestDataFound()
+        {
+            //create an instance of the filtered data
+            clsStockCollection FilteredStock = new clsStockCollection();
+            //boolean to store the outcome
+            Boolean OK = true;
+            //apply a blank string, this will return all the records
+            FilteredStock.ReportByType("Jersey");
+            //check that the correct number of records are found
+            if (FilteredStock.Count == 3)
+            {
+                //checks that the first record is ID 6
+                if (FilteredStock.StockList[0].ProductNo != 6)
+                {
+                    OK = false;
+                }
+                //checks that the second record is ID 8
+                if (FilteredStock.StockList[1].ProductNo != 8)
+                {
+                    OK = false;
+                }
+                //checks that the third record is ID 13
+                if (FilteredStock.StockList[2].ProductNo != 13)
+                {
+                    OK = false;
+                }
+            }
+            else
+            {
+                OK = false;
+            }
+            //test to see that there are no records
+            Assert.IsTrue(OK);
+        }
     }
 }

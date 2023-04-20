@@ -8,13 +8,20 @@ using ClassLibrary;
 
 public partial class _1_List : System.Web.UI.Page
 {
+    //variable to store the primary key with page level scope
+    Int32 ProductNo;
     protected void Page_Load(object sender, EventArgs e)
     {
-        //if this is the first time the page is displayed
+        //get the ID of the product to be processed
+        ProductNo = Convert.ToInt32(Session["ProductNo"]);
         if(IsPostBack == false)
         {
-            //updates the list box
-            DisplayStock();
+            //if this is not a new record
+            if (ProductNo != -1)
+            {
+                //display the current data for the record
+                DisplayStock();
+            }
         }
     }
 
@@ -45,11 +52,6 @@ public partial class _1_List : System.Web.UI.Page
         Response.Redirect("StockDataEntry.aspx");
     }
 
-
-
-
-
-
     protected void btnEdit_Click1(object sender, EventArgs e)
     {
         //variable to store the primary key value of the record to be edited
@@ -69,5 +71,63 @@ public partial class _1_List : System.Web.UI.Page
         {
             lblError.Text = "Please select a record to edit from the list";
         }
+    }
+
+    protected void btnDelete_Click(object sender, EventArgs e)
+    {
+        //variable to store the primary key value of the record to be edited
+        Int32 ProductNo;
+        //if a record has been selected from the list
+        if (lstStockList.SelectedIndex != -1)
+        {
+            //get the primary key value of the record
+            ProductNo = Convert.ToInt32(lstStockList.SelectedValue);
+            //store the data in the session object
+            Session["ProductNo"] = ProductNo;
+            //redirect to the edit page
+            Response.Redirect("StockConfirmDelete.aspx");
+        }
+        //if no record has been selected
+        else
+        {
+            lblError.Text = "Please select a record to delete from the list";
+        }
+    }
+
+    protected void btnApply_Click(object sender, EventArgs e)
+    {
+        //create an instance of the stock collection
+        clsStockCollection Products = new clsStockCollection();
+        //searches records with the same product type
+        Products.ReportByType(txtFilter.Text);
+        lstStockList.DataSource = Products.StockList;
+        //set the name of the primary key
+        lstStockList.DataValueField = "ProductNo";
+        //set the name of the field to display
+        lstStockList.DataValueField = "Type";
+        //bind the data to the list
+        lstStockList.DataBind();
+    }
+
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        //create an instance of the stock collection
+        clsStockCollection Products = new clsStockCollection();
+        Products.ReportByType("");
+        //clear any existing filter
+        txtFilter.Text = "";
+        lstStockList.DataSource = Products.StockList;
+        //set the name of the primary key
+        lstStockList.DataValueField = "ProductNo";
+        //set the name of the field to display
+        lstStockList.DataValueField = "Type";
+        //bind the data to the list
+        lstStockList.DataBind();
+    }
+
+
+    protected void txtType_TextChanged(object sender, EventArgs e)
+    {
+
     }
 }
