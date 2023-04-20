@@ -12,7 +12,7 @@
             <asp:ListBox ID="lstStockList" runat="server" Height="415px" OnSelectedIndexChanged="ListBox1_SelectedIndexChanged" Width="505px"></asp:ListBox>
         </div>
         <asp:Button ID="btnAdd" runat="server" OnClick="btnAdd_Click" Text="Add" />
-        <asp:Button ID="btnEdit" runat="server" OnClick="Button1_Click" Text="Edit" />
+        <asp:Button ID="btnEdit" runat="server" OnClick="btnEdit_Click1" Text="Edit" />
         <p>
             <asp:Label ID="lblError" runat="server"></asp:Label>
         </p>

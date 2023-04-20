@@ -46,7 +46,11 @@ public partial class _1_List : System.Web.UI.Page
     }
 
 
-    protected void btnEdit_Click(object sender, EventArgs e)
+
+
+
+
+    protected void btnEdit_Click1(object sender, EventArgs e)
     {
         //variable to store the primary key value of the record to be edited
         Int32 ProductNo;
@@ -66,5 +70,4 @@ public partial class _1_List : System.Web.UI.Page
             lblError.Text = "Please select a record to edit from the list";
         }
     }
-
 }
