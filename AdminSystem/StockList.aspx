@@ -13,6 +13,15 @@
         </div>
         <asp:Button ID="btnAdd" runat="server" OnClick="btnAdd_Click" Text="Add" />
         <asp:Button ID="btnEdit" runat="server" OnClick="btnEdit_Click1" Text="Edit" />
+        <asp:Button ID="btnDelete" runat="server" OnClick="btnDelete_Click" Text="Delete" />
+        <p>
+            <asp:Label ID="lblType" runat="server" Text="Enter a product type"></asp:Label>
+            <asp:TextBox ID="txtFilter" runat="server" OnTextChanged="txtType_TextChanged" style="margin-left: 12px"></asp:TextBox>
+        </p>
+        <p>
+            <asp:Button ID="btnApply" runat="server" OnClick="btnApply_Click" Text="Apply" />
+            <asp:Button ID="btnClear" runat="server" OnClick="btnClear_Click" style="margin-left: 6px" Text="Clear" />
+        </p>
         <p>
             <asp:Label ID="lblError" runat="server"></asp:Label>
         </p>
