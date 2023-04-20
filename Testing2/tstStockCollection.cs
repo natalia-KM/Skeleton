@@ -155,5 +155,37 @@ namespace Testing2
             //test to see if the two values are the same
             Assert.AreEqual(AllStock.ThisStock, TestItem);
         }
+    /*
+        [TestMethod]
+        public void DeleteMethodOK()
+        {
+            //create an instance of the class
+            clsStockCollection AllStock = new clsStockCollection();
+            //creates a variable TestItem to store test data
+            clsStock TestItem = new clsStock();
+            //variable to store the primary key
+            Int32 PrimaryKey = 0;
+            //sets the properties for TestItem
+            TestItem.ProductDescription = "Adidas Shoes";
+            TestItem.DateAdded = DateTime.Now.Date;
+            TestItem.Size = "7";
+            TestItem.Type = "Shoes";
+            TestItem.Stock = 50;
+            TestItem.Price = 5.5;
+            //set ThisStock to the test data
+            AllStock.ThisStock = TestItem;
+            //add the record
+            PrimaryKey = AllStock.Add();
+            //set the primary key of the test data
+            TestItem.ProductNo = PrimaryKey;
+            //find the record
+            AllStock.ThisStock.Find(PrimaryKey);
+            //deletes the record
+            AllStock.Delete();
+            //finds the record and returns true or false
+            Boolean Found = AllStock.ThisStock.Find(PrimaryKey);
+            //test to see if the record was not found
+            Assert.IsFalse(Found);
+        } */
     }
 }
