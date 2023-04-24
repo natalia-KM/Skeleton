@@ -12,16 +12,11 @@ public partial class _1_List : System.Web.UI.Page
     Int32 ProductNo;
     protected void Page_Load(object sender, EventArgs e)
     {
-        //get the ID of the product to be processed
-        ProductNo = Convert.ToInt32(Session["ProductNo"]);
-        if(IsPostBack == false)
+        //if this is the first time the page is displayed
+        if (IsPostBack == false)
         {
-            //if this is not a new record
-            if (ProductNo != -1)
-            {
-                //display the current data for the record
-                DisplayStock();
-            }
+            //display the current data for the record
+            DisplayStock();
         }
     }
 
