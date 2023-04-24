@@ -12,9 +12,34 @@ public partial class _1_DataEntry : System.Web.UI.Page
     Int32 ProductNo;
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        //get the ID of the product to be processed
+        ProductNo = Convert.ToInt32(Session["ProductNo"]);
+        if (IsPostBack == false)
+        {
+            //if this is not a new record
+            if (ProductNo != -1)
+            {
+                //display the current data for the record
+                DisplayStock();
+            }
+        }
     }
 
+    void DisplayStock()
+    {
+        //create an instance of stock collection
+        clsStockCollection Stock = new clsStockCollection();
+        //find the record to update
+        Stock.ThisStock.Find(ProductNo);
+        //display the data for this record
+        txtProductNo.Text = Stock.ThisStock.ProductNo.ToString();
+        txtProductDescription.Text = Stock.ThisStock.ProductDescription;
+        txtDateAdded.Text = Stock.ThisStock.DateAdded.ToString();
+        txtSize.Text = Stock.ThisStock.Size;
+        txtType.Text = Stock.ThisStock.Type;
+        txtStock.Text = Stock.ThisStock.Stock.ToString();
+        txtPrice.Text = Stock.ThisStock.Price.ToString();
+    }
 
     protected void btnOK_Click(object sender, EventArgs e)
     {
