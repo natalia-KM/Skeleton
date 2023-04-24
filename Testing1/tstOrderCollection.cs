@@ -152,5 +152,50 @@ namespace Testing1
             //test to see that the two values are the same
             Assert.AreEqual(AllOrders.ThisOrder, TestItem);
         }
+
+        [TestMethod]
+        public void UpdateMethodOK()
+        {
+            //create an instance of the class we want to create
+            clsOrderCollection AllOrders = new clsOrderCollection();
+            //create the item of test data
+            clsOrder TestItem = new clsOrder();
+            //var to store the primary key
+            Int32 PrimaryKey = 0;
+            //set its properties
+            TestItem.Dispatched = true;
+            TestItem.OrderID = 21;
+            TestItem.OrderDate = Convert.ToDateTime("24/04/2023");
+            TestItem.OrderCost = 60.0000;
+            TestItem.CustomerID = 10;
+            TestItem.Notes = "";
+            TestItem.OrderQuantity = 2;
+            //set ThisOrder to the test data
+            AllOrders.ThisOrder = TestItem;
+            //add the record
+            PrimaryKey = AllOrders.Add();
+            //set the primary key of the test data
+            TestItem.OrderID = PrimaryKey;
+            //modify the test data
+            TestItem.Dispatched = false;
+            TestItem.OrderID = 21;
+            TestItem.OrderDate = Convert.ToDateTime("24/04/2023");
+            TestItem.OrderCost = 90.0000;
+            TestItem.CustomerID = 10;
+            TestItem.Notes = "";
+            TestItem.OrderQuantity = 3;
+            //set the record baed on the new test data
+            AllOrders.ThisOrder = TestItem;
+            //update the record
+            AllOrders.Update();
+            //find the record
+            AllOrders.ThisOrder.Find(PrimaryKey);
+            //test to see ThisOrder matches the test data
+            //ThisOrder contained a record, which then had its data updated via updating the data of the test data 
+            // and assigning this test data to the ThisOrder property of the collections class
+            //Update method was performed and now checking if that record can be found
+            // in the data layer, then compare that found record to the test data (which was updated)
+            Assert.AreEqual(AllOrders.ThisOrder, TestItem);
+        }
     }
 }

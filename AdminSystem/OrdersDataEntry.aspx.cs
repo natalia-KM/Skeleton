@@ -8,9 +8,21 @@ using ClassLibrary;
 
 public partial class _1_DataEntry : System.Web.UI.Page
 {
+    //variable to store the primary key with page level scope
+    Int32 OrderID;
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        //get the number of the order to be processed
+        OrderID = Convert.ToInt32(Session["OrderID"]);
+        if (IsPostBack == false)
+        {
+            //if this is not a new record
+            if (OrderID != -1)
+            {
+                //display the current data for the record
+                DisplayOrders();
+            }
+        }
     }
 
 
@@ -44,10 +56,25 @@ public partial class _1_DataEntry : System.Web.UI.Page
             AnOrder.OrderQuantity = Convert.ToInt32(txtOrderQuantity.Text);
             //create a new instance of the Order collection
             clsOrderCollection OrderList = new clsOrderCollection();
-            //set the ThisOrder property
-            OrderList.ThisOrder = AnOrder;
-            //add the new record
-            OrderList.Add();
+
+            //if this is a new record i.e. OrderID = -1 then add the data
+            if (OrderID == -1)
+            {
+                //set the ThisOrder property
+                OrderList.ThisOrder = AnOrder;
+                //add the new record
+                OrderList.Add();
+            }
+            //otherwise it must be an update
+            else
+            {
+                //find the record to update
+                OrderList.ThisOrder.Find(OrderID);
+                //set the ThisOrder property
+                OrderList.ThisOrder = AnOrder;
+                //update the record
+                OrderList.Update();
+            }
             //redirect back to the list page
             Response.Redirect("OrdersList.aspx");
         }
@@ -93,5 +120,21 @@ public partial class _1_DataEntry : System.Web.UI.Page
         {
             lblError.Text = "Record with OrderID " + txtOrderID.Text + " not found";
         }
+    }
+    void DisplayOrders()
+    {
+        //create an instance of the OrderCollection
+        clsOrderCollection OrderCol = new clsOrderCollection();
+        //find the record to update
+        OrderCol.ThisOrder.Find(OrderID);
+        //display the data for this record
+        txtOrderID.Text = OrderCol.ThisOrder.OrderID.ToString();
+        txtOrderDate.Text = OrderCol.ThisOrder.OrderDate.ToString();
+        txtOrderCost.Text = OrderCol.ThisOrder.OrderCost.ToString();
+        txtCustomerID.Text = OrderCol.ThisOrder.CustomerID.ToString();
+        txtNotes.Text = OrderCol.ThisOrder.Notes;
+        chkDispatched.Checked = OrderCol.ThisOrder.Dispatched;
+        txtOrderQuantity.Text = OrderCol.ThisOrder.OrderQuantity.ToString();
+
     }
 }
