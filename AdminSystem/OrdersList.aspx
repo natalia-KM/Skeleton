@@ -14,6 +14,8 @@
         </div>
         <asp:Button ID="btnAdd" runat="server" OnClick="btnAdd_Click" Text="ADD" ToolTip="Add record" />
         <asp:Button ID="btnEdit" runat="server" OnClick="btnEdit_Click" Text="EDIT ORDER" />
+        <asp:Button ID="btnEdit_OrderLine" runat="server" OnClick="btnEdit_OrderLine_Click" Text="EDIT ORDERLINE" Width="134px" />
+        <asp:Button ID="btnDelete" runat="server" OnClick="btnDelete_Click" Text="DELETE ORDER" Width="119px" />
         <p>
             <asp:Label ID="lblError" runat="server" ForeColor="Red"></asp:Label>
         </p>
