@@ -69,7 +69,33 @@ public partial class _1_List : System.Web.UI.Page
         }
         else //if no record has been selected
         {
-            lblError.Text = "Please select a record to edit from the list";
+            lblError.Text = "Please select a record to edit from the Orders list";
         }
+    }
+
+    protected void btnDelete_Click(object sender, EventArgs e)
+    {
+        //var to store the primary key value of the record to be edited
+        Int32 OrderID;
+        //if a record has been selected from the ListBox control for Orders
+        if (lstOrderList.SelectedIndex != -1) //allows us to make sure that an entry on the listbox has been clicked/selected
+        {
+            //get the primary key value of the record to delete
+            OrderID = Convert.ToInt32(lstOrderList.SelectedValue); //SelectedValue property holds primary key value of the selected record in the listbox
+            //store the data in the session object
+            Session["OrderID"] = OrderID;
+            //redirect to the delete page
+            Response.Redirect("OrdersConfirmDelete.aspx");
+        }
+        else //if no record has been selected
+        {
+            //display an error
+            lblError.Text = "Please select a record to delete from the Orders list";
+        }
+    }
+
+    protected void btnEdit_OrderLine_Click(object sender, EventArgs e)
+    {
+        
     }
 }
