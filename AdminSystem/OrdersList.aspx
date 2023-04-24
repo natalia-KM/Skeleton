@@ -13,6 +13,10 @@
             <asp:ListBox ID="lstOrderLineList" runat="server" BackColor="#33CCCC" Font-Bold="True" Font-Italic="False" Font-Size="Small" ForeColor="White" Height="407px" style="margin-left: 14px; margin-top: 0px" ToolTip="OrderLineList" Width="207px"></asp:ListBox>
         </div>
         <asp:Button ID="btnAdd" runat="server" OnClick="btnAdd_Click" Text="ADD" ToolTip="Add record" />
+        <asp:Button ID="btnEdit" runat="server" OnClick="btnEdit_Click" Text="EDIT ORDER" />
+        <p>
+            <asp:Label ID="lblError" runat="server" ForeColor="Red"></asp:Label>
+        </p>
     </form>
 </body>
 </html>
