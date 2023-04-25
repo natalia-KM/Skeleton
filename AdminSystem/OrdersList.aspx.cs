@@ -98,4 +98,34 @@ public partial class _1_List : System.Web.UI.Page
     {
         
     }
+
+    protected void btnApply_Click(object sender, EventArgs e)
+    {
+        //create an instanceo f the order collection
+        clsOrderCollection Orders = new clsOrderCollection();
+        Orders.ReportByCustomerID(Convert.ToInt32(txtCustomerIDFilter.Text));
+        lstOrderList.DataSource = Orders.OrderList;
+        //set the name of the primary key
+        lstOrderList.DataValueField = "OrderID";
+        //set the name of the field to display
+        lstOrderList.DataTextField = "CustomerID";
+        //bind the data to the list
+        lstOrderList.DataBind();
+    }
+
+    // clear button removes filter
+    //so begin displaying orders by their date just like it was presented
+    // prior to pressing the apply filter button
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        //Orders.ReportByCustomerID(-1);
+        //clear any existing filter to tidy up the interface
+        txtCustomerIDFilter.Text = "";
+        DisplayOrders();
+    }
+
+    protected void btnCheckOrderID_Click(object sender, EventArgs e)
+    {
+        btnCheckOrderID.Text = "Check Selected Order's OrderID " + "(ID is " + lstOrderList.SelectedValue + ")";
+    }
 }

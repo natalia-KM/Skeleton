@@ -10,9 +10,11 @@
     <form id="form1" runat="server">
         <div>
             <asp:Label ID="lblConfirmDeleteQuestion" runat="server" BorderColor="White" BorderWidth="15px" Font-Bold="False" Font-Italic="False" Text="Are you sure you want to delete this record?"></asp:Label>
+            <br />
+            (Note: Deleting an Order will also delete the corresponding OrderLines for that Order.)<br />
         </div>
-        <asp:Button ID="btnYes" runat="server" OnClick="btnYes_Click" style="margin-left: 84px" Text="Yes" />
-        <asp:Button ID="btnNo" runat="server" OnClick="btnNo_Click" style="margin-left: 36px" Text="No" />
+        <asp:Button ID="btnYes" runat="server" OnClick="btnYes_Click" style="margin-left: 78px" Text="Yes" />
+        <asp:Button ID="btnNo" runat="server" OnClick="btnNo_Click" style="margin-left: 66px" Text="No" />
     </form>
 </body>
 </html>

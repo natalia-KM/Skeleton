@@ -230,5 +230,64 @@ namespace Testing1
             //test to see that the record was not found
             Assert.IsFalse(Found);
         }
+
+        [TestMethod]
+        public void ReportByCustomerIDMethodOK()
+        {
+            //create an instance of the class containing unfiltered results
+            clsOrderCollection AllOrders = new clsOrderCollection();
+            //create an instance of the filtered data
+            clsOrderCollection FilteredOrders = new clsOrderCollection();
+            //apply a filter of 1 so all records with CustomerID 1 will be visible.
+            FilteredOrders.ReportByCustomerID(1);
+            //test to see that the two values are the same
+            Assert.AreEqual(1, FilteredOrders.Count);
+        }
+
+        [TestMethod]
+        public void ReportByCustomerIDNoneFound()
+        {
+            //create an instance of the filtered data
+            clsOrderCollection FilteredOrders = new clsOrderCollection();
+            //apply a customerID filter that doesn't exist.
+            FilteredOrders.ReportByCustomerID(-1);
+            //test to see that there are no records, because since the filter has been
+            // applied, there should be no records because the CustomerID value provided as filter doesn't exist
+            Assert.AreEqual(0, FilteredOrders.Count);
+        }
+
+        [TestMethod]
+        public void ReportByCustomerIDTestDataFound()
+        {
+            //create an instance of the filtered data
+            clsOrderCollection FilteredOrders = new clsOrderCollection();
+            //var to store outcome
+            Boolean OK = true;
+            //apply a CustomerID filter
+            FilteredOrders.ReportByCustomerID(999);
+            //check that the correct number of records are found
+            if (FilteredOrders.Count == 2)
+            {
+                //check that the first record is ID 57
+                if (FilteredOrders.OrderList[0].OrderID != 57)
+                {
+                    OK = false; // if the retrieved record's OrderID is not equal to xx then set OK to false
+                    //..because the record that was retrieved is not the record created specifically for this test
+                }
+                //check that the second record is ID 58
+                if (FilteredOrders.OrderList[1].OrderID != 58)
+                {
+                    OK = false;
+                }
+            }
+            else
+            {
+                OK = false;
+            }
+            //test to see that the created records in the data layer for 
+            // the purpose of this test, were found.
+            Assert.IsTrue(OK);
+        }
+
     }
 }
