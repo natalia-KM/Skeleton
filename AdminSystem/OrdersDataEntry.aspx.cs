@@ -137,4 +137,9 @@ public partial class _1_DataEntry : System.Web.UI.Page
         txtOrderQuantity.Text = OrderCol.ThisOrder.OrderQuantity.ToString();
 
     }
+
+    protected void btnGetTodaysDate_Click(object sender, EventArgs e)
+    {
+        txtOrderDate.Text = Convert.ToString(DateTime.Now.Date);
+    }
 }

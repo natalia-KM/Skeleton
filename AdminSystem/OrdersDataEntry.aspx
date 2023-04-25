@@ -16,6 +16,7 @@
         <p>
             <asp:Label ID="lblOrderDate" runat="server" Text="Order Date" width="92px"></asp:Label>
             <asp:TextBox ID="txtOrderDate" runat="server" style="margin-left: 11px" Width="105px"></asp:TextBox>
+            <asp:Button ID="btnGetTodaysDate" runat="server" OnClick="btnGetTodaysDate_Click" style="margin-left: 21px" Text="GET TODAYS DATE" ToolTip="Retrieves today's date" Width="147px" />
         </p>
         <asp:Label ID="lblOrderCost" runat="server" Text="Order Cost" width="92px"></asp:Label>
         <asp:TextBox ID="txtOrderCost" runat="server" style="margin-left: 11px" Width="105px"></asp:TextBox>
