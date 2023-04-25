@@ -305,8 +305,8 @@ namespace Testing1
             String Error = "";
             //create a variable to store the test date data
             DateTime TestDate;
-            //set the date to todays date
-            TestDate = DateTime.Now.Date;
+            //set the date to min date (start of 2022 1st jan)
+            TestDate = DateTime.Parse("01/01/2022");
             //change the date to whatever the date is, 100 years ago
             TestDate = TestDate.AddYears(-100);
             //Convert the date variable to a string variable
@@ -326,8 +326,8 @@ namespace Testing1
             String Error = "";
             //create a variable to store the test date data
             DateTime TestDate;
-            //set the date to todays date
-            TestDate = DateTime.Now.Date;
+            //set the date to min date (start of 2022 1st jan)
+            TestDate = DateTime.Parse("01/01/2022");
             //change the date to whatever the date is less 1 day (-1, go one day back)
             TestDate = TestDate.AddDays(-1);
             //Convert the date variable to a string variable
@@ -347,8 +347,8 @@ namespace Testing1
             String Error = "";
             //create a variable to store the test date data
             DateTime TestDate;
-            //set the date to Todays date
-            TestDate = DateTime.Now.Date;
+            //set the date to min date (start of 2022 1st jan)
+            TestDate = DateTime.Parse("01/01/2022");
             //convert the date variable to a string variable
             string OrderDate = TestDate.ToString();
             //invoke the method
@@ -366,8 +366,8 @@ namespace Testing1
             String Error = "";
             //create a variable to store the test date data
             DateTime TestDate;
-            //set the date to todays date
-            TestDate = DateTime.Now.Date;
+            //set the date to min date (start of 2022 1st jan)
+            TestDate = DateTime.Parse("01/01/2022");
             //change the date to whatever the date is plus 1 day (+1, go one day forward)
             TestDate = TestDate.AddDays(1);
             //Convert the date variable to a string variable
@@ -375,7 +375,7 @@ namespace Testing1
             //invoke the method
             Error = AnOrder.Valid(OrderDate, OrderCost, CustomerID, Notes, OrderQuantity);
             //test to see that the result is correct
-            Assert.AreNotEqual(Error, "");
+            Assert.AreEqual(Error, "");
         }
 
         [TestMethod]

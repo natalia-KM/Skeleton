@@ -268,14 +268,14 @@ namespace Testing1
             //check that the correct number of records are found
             if (FilteredOrders.Count == 2)
             {
-                //check that the first record is ID 47
-                if (FilteredOrders.OrderList[0].OrderID != 47)
+                //check that the first record is ID 57
+                if (FilteredOrders.OrderList[0].OrderID != 57)
                 {
                     OK = false; // if the retrieved record's OrderID is not equal to xx then set OK to false
                     //..because the record that was retrieved is not the record created specifically for this test
                 }
-                //check that the second record is ID 48
-                if (FilteredOrders.OrderList[1].OrderID != 48)
+                //check that the second record is ID 58
+                if (FilteredOrders.OrderList[1].OrderID != 58)
                 {
                     OK = false;
                 }

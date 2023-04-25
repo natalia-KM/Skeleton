@@ -150,11 +150,11 @@ namespace ClassLibrary
             {
                 //copy the orderDate value to the DateTemp variable
                 DateTemp = Convert.ToDateTime(orderDate);
-                //check to see if the date is less than today's date
-                if (DateTemp < DateTime.Now.Date)
+                //check to see if the date is less than start of 2022 1st jan
+                if (DateTemp < Convert.ToDateTime("01/01/2022"))
                 {
                     //record the error
-                    Error += "The OrderDate cannot be in the past ; ";
+                    Error += "The OrderDate cannot be in the past / before 2022 ; ";
                 }
                 //check to see if the date is greater than today's date
                 if (DateTemp > DateTime.Now.Date)
