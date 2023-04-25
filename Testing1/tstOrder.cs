@@ -196,7 +196,7 @@ namespace Testing1
         [TestMethod]
         public void TestCustomerIDFound()
         {
-            //create an instance of the class we want to create
+            //create an instance of the class we want to create.
             clsOrder AnOrder = new clsOrder();
             //Boolean variable to store the results of the search
             Boolean found = false;
