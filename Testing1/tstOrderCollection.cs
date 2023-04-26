@@ -232,14 +232,14 @@ namespace Testing1
         }
 
         [TestMethod]
-        public void ReportByCustomerIDMethodOK()
+        public void ReportByOrderDateMethodOK()
         {
             //create an instance of the class containing unfiltered results
             clsOrderCollection AllOrders = new clsOrderCollection();
             //create an instance of the filtered data
             clsOrderCollection FilteredOrders = new clsOrderCollection();
-            //apply a filter of 1 so all records with CustomerID 1 will be visible.
-            FilteredOrders.ReportByCustomerID(1);
+            //apply a filter of blank string so all records will be visible.
+            FilteredOrders.ReportByOrderDate(DateTime.Parse("10/02/2023"));
             //test to see that the two values are the same
             Assert.AreEqual(1, FilteredOrders.Count);
         }
@@ -249,29 +249,29 @@ namespace Testing1
         {
             //create an instance of the filtered data
             clsOrderCollection FilteredOrders = new clsOrderCollection();
-            //apply a customerID filter that doesn't exist.
-            FilteredOrders.ReportByCustomerID(-1);
+            //apply a orderdate filter that doesn't exist.
+            FilteredOrders.ReportByOrderDate(DateTime.Parse("29/01/2022"));
             //test to see that there are no records, because since the filter has been
-            // applied, there should be no records because the CustomerID value provided as filter doesn't exist
+            // applied, there should be no records because the OrderDate value provided as filter doesn't exist
             Assert.AreEqual(0, FilteredOrders.Count);
         }
 
         [TestMethod]
-        public void ReportByCustomerIDTestDataFound()
+        public void ReportByOrderDateTestDataFound()
         {
             //create an instance of the filtered data
             clsOrderCollection FilteredOrders = new clsOrderCollection();
             //var to store outcome
             Boolean OK = true;
-            //apply a CustomerID filter
-            FilteredOrders.ReportByCustomerID(999);
+            //apply an OrderDate filter
+            FilteredOrders.ReportByOrderDate(DateTime.Parse("20/04/2023"));
             //check that the correct number of records are found
             if (FilteredOrders.Count == 2)
             {
                 //check that the first record is ID 57
                 if (FilteredOrders.OrderList[0].OrderID != 57)
                 {
-                    OK = false; // if the retrieved record's OrderID is not equal to xx then set OK to false
+                    OK = false; // if the retrieved record's OrderID is not equal to 57 then set OK to false
                     //..because the record that was retrieved is not the record created specifically for this test
                 }
                 //check that the second record is ID 58

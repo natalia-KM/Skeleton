@@ -24,8 +24,8 @@
         <asp:Button ID="btnDelete" runat="server" OnClick="btnDelete_Click" Text="DELETE ORDER" Width="119px" style="margin-left: 0px" />
         <br />
         <br />
-        <asp:Label ID="lblEnterMsg" runat="server" Text="Enter a CustomerID:"></asp:Label>
-        <asp:TextBox ID="txtCustomerIDFilter" runat="server" style="margin-left: 9px" ToolTip="Enter a CustomerID value to filter the records."></asp:TextBox>
+        <asp:Label ID="lblEnterMsg" runat="server" Text="Enter an Order Date:"></asp:Label>
+        <asp:TextBox ID="txtOrderDateFilter" runat="server" style="margin-left: 9px" ToolTip="Enter a OrderDate value to filter the records."></asp:TextBox>
         <br />
         <asp:Button ID="btnApply" runat="server" OnClick="btnApply_Click" Text="APPLY FILTER" />
         <asp:Button ID="btnClear" runat="server" Text="CLEAR" OnClick="btnClear_Click" />
