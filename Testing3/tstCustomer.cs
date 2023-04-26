@@ -174,7 +174,7 @@ namespace Testing3
             Boolean OK = true;
             Int32 CustomerID = 1;
             Found = ACustomer.Find(CustomerID);
-            if (ACustomer.PhoneNumber != "07388596274")
+            if (ACustomer.PhoneNumber != "+7388596274")
             {
                 OK = false;
             }

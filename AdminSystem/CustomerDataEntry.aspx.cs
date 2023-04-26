@@ -8,9 +8,17 @@ using ClassLibrary;
 
 public partial class _1_DataEntry : System.Web.UI.Page
 {
+    Int32 CustomerID;
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        CustomerID = Convert.ToInt32(Session["CustomerID"]);
+        if (IsPostBack == false)
+        {
+            if (CustomerID != -1)
+            {
+                DisplayCustomers();
+            }
+        }
     }
 
     protected void btnOK_Click(object sender, EventArgs e)
@@ -26,13 +34,20 @@ public partial class _1_DataEntry : System.Web.UI.Page
         string Error = "";
         // Validate the data
         Error = ACustomer.Valid(FullName, Email, PhoneNumber, DateOfBirth, TotalSpent);
-        if (Convert.ToDateTime(DateOfBirth).Year < DateTime.Now.Year)
+        if (txtDateOfBirth.Text != "")
         {
-            if (DateTime.Now.Year - Convert.ToDateTime(DateOfBirth).Year < 14)
+            if (Convert.ToDateTime(DateOfBirth).Year < DateTime.Now.Year)
             {
-                //record the error
-                Error += "You must be 14 or over." + "<br />";
+                if (DateTime.Now.Year - Convert.ToDateTime(DateOfBirth).Year < 14)
+                {
+                    //record the error
+                    Error += "You must be 14 or over." + "<br />";
+                }
             }
+        } 
+        else
+        {
+            Error += "Please input a date of birth" + "<br />";
         }
         if (Error == "")
         {
@@ -43,8 +58,24 @@ public partial class _1_DataEntry : System.Web.UI.Page
             ACustomer.DateOfBirth = Convert.ToDateTime(txtDateOfBirth.Text);
             ACustomer.TotalSpent = Convert.ToDouble(txtTotalSpent.Text);
             ACustomer.PaymentDataAdded = chkPaymentDataAdded.Checked;
-            Session["ACustomer"] = ACustomer;
-            Response.Redirect("CustomerViewer.aspx");
+            clsCustomerCollection CustomerList = new clsCustomerCollection();
+            //if this is new record i.e. CustomerID = -1 then add the data
+            if (CustomerID == -1)
+            {
+                CustomerList.ThisCustomer = ACustomer;
+                //add new record
+                CustomerList.Add();
+            }
+            //otherwise it must be update
+            else
+            {
+                CustomerList.ThisCustomer.Find(CustomerID);
+                CustomerList.ThisCustomer = ACustomer;
+                //update the record
+                CustomerList.Update();
+            }
+            //redirect back to the list page
+            Response.Redirect("CustomerList.aspx");
         }
         else
         {
@@ -80,5 +111,19 @@ public partial class _1_DataEntry : System.Web.UI.Page
         {
             lblError.Text = "CustomerID " + txtCustomerID.Text + " not found";
         }
+    }
+
+    public void DisplayCustomers()
+    {
+        clsCustomerCollection CustomerCollection = new clsCustomerCollection();
+        CustomerCollection.ThisCustomer.Find(CustomerID);
+        //display the data for this record
+        txtCustomerID.Text = CustomerCollection.ThisCustomer.CustomerID.ToString();
+        txtFullName.Text = CustomerCollection.ThisCustomer.FullName;
+        txtEmail.Text = CustomerCollection.ThisCustomer.Email;
+        txtPhoneNumber.Text = CustomerCollection.ThisCustomer.PhoneNumber;
+        txtDateOfBirth.Text = CustomerCollection.ThisCustomer.DateOfBirth.ToString();
+        txtTotalSpent.Text = CustomerCollection.ThisCustomer.TotalSpent.ToString();
+        chkPaymentDataAdded.Checked = CustomerCollection.ThisCustomer.PaymentDataAdded;
     }
 }
