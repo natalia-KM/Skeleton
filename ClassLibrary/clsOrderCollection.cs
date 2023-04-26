@@ -109,15 +109,15 @@ namespace ClassLibrary
             //DB.Execute("sproc_tblOrderLine_Delete");
         }
 
-        public void ReportByCustomerID(int CustomerID)
+        public void ReportByOrderDate(DateTime OrderDate)
         {
-            //filters the records based on a CustomerID Value
+            //filters the records based on OrderDate Value
             //connect to the database
             clsDataConnection DB = new clsDataConnection();
-            //send the CustmeRID parameter to the database
-            DB.AddParameter("@CustomerID", CustomerID);
+            //send the OrderDate parameter to the database
+            DB.AddParameter("@OrderDate", OrderDate);
             //execute the stored procedure
-            DB.Execute("sproc_tblOrder_FilterByCustomerID");
+            DB.Execute("sproc_tblOrder_FilterByOrderDate");
             //populate the array list with the data table
             PopulateArray(DB);
         }

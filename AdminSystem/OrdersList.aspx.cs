@@ -101,16 +101,23 @@ public partial class _1_List : System.Web.UI.Page
 
     protected void btnApply_Click(object sender, EventArgs e)
     {
-        //create an instanceo f the order collection
-        clsOrderCollection Orders = new clsOrderCollection();
-        Orders.ReportByCustomerID(Convert.ToInt32(txtCustomerIDFilter.Text));
-        lstOrderList.DataSource = Orders.OrderList;
-        //set the name of the primary key
-        lstOrderList.DataValueField = "OrderID";
-        //set the name of the field to display
-        lstOrderList.DataTextField = "CustomerID";
-        //bind the data to the list
-        lstOrderList.DataBind();
+        //create an instance of the order collection
+        if (txtOrderDateFilter.Text != "")
+        {
+            clsOrderCollection Orders = new clsOrderCollection();
+            Orders.ReportByOrderDate(Convert.ToDateTime(txtOrderDateFilter.Text));
+            lstOrderList.DataSource = Orders.OrderList;
+            //set the name of the primary key
+            lstOrderList.DataValueField = "OrderID";
+            //set the name of the field to display
+            lstOrderList.DataTextField = "OrderDate";
+            //bind the data to the list
+            lstOrderList.DataBind();
+        } 
+        else
+        {
+            lblError.Text = "Please enter a date before applying the filter.";
+        }
     }
 
     // clear button removes filter
@@ -120,7 +127,7 @@ public partial class _1_List : System.Web.UI.Page
     {
         //Orders.ReportByCustomerID(-1);
         //clear any existing filter to tidy up the interface
-        txtCustomerIDFilter.Text = "";
+        txtOrderDateFilter.Text = "";
         DisplayOrders();
     }
 
