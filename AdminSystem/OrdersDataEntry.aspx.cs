@@ -43,47 +43,53 @@ public partial class _1_DataEntry : System.Web.UI.Page
         string Error = "";
         //validate the data
         Error = AnOrder.Valid(OrderDate, OrderCost, CustomerID, Notes, OrderQuantity);
-        if (Error == "") // contents of Error equating to blank "" means no errors, data is validated and good.
+        if (txtOrderID.Text != "")
         {
-            // validation was successful, data is good
-            // Capture data that is entered in the textboxes
-            AnOrder.OrderID = Convert.ToInt32(txtOrderID.Text);
-            AnOrder.OrderDate = Convert.ToDateTime(txtOrderDate.Text);
-            AnOrder.OrderCost = Convert.ToDouble(txtOrderCost.Text);
-            AnOrder.CustomerID = Convert.ToInt32(txtCustomerID.Text);
-            AnOrder.Notes = txtNotes.Text;
-            AnOrder.Dispatched = chkDispatched.Checked;
-            AnOrder.OrderQuantity = Convert.ToInt32(txtOrderQuantity.Text);
-            //create a new instance of the Order collection
-            clsOrderCollection OrderList = new clsOrderCollection();
-
-            //if this is a new record i.e. OrderID = -1 then add the data
-            if (OrderID == -1)
+            if (Error == "") // contents of Error equating to blank "" means no errors, data is validated and good.
             {
-                //set the ThisOrder property
-                OrderList.ThisOrder = AnOrder;
-                //add the new record
-                OrderList.Add();
+                // validation was successful, data is good
+                // Capture data that is entered in the textboxes
+                AnOrder.OrderID = Convert.ToInt32(txtOrderID.Text);
+                AnOrder.OrderDate = Convert.ToDateTime(txtOrderDate.Text);
+                AnOrder.OrderCost = Convert.ToDouble(txtOrderCost.Text);
+                AnOrder.CustomerID = Convert.ToInt32(txtCustomerID.Text);
+                AnOrder.Notes = txtNotes.Text;
+                AnOrder.Dispatched = chkDispatched.Checked;
+                AnOrder.OrderQuantity = Convert.ToInt32(txtOrderQuantity.Text);
+                //create a new instance of the Order collection
+                clsOrderCollection OrderList = new clsOrderCollection();
+
+                //if this is a new record i.e. OrderID = -1 then add the data
+                if (OrderID == -1)
+                {
+                    //set the ThisOrder property
+                    OrderList.ThisOrder = AnOrder;
+                    //add the new record
+                    OrderList.Add();
+                }
+                //otherwise it must be an update
+                else
+                {
+                    //find the record to update
+                    OrderList.ThisOrder.Find(OrderID);
+                    //set the ThisOrder property
+                    OrderList.ThisOrder = AnOrder;
+                    //update the record
+                    OrderList.Update();
+                }
+                //redirect back to the list page
+                Response.Redirect("OrdersList.aspx");
             }
-            //otherwise it must be an update
             else
             {
-                //find the record to update
-                OrderList.ThisOrder.Find(OrderID);
-                //set the ThisOrder property
-                OrderList.ThisOrder = AnOrder;
-                //update the record
-                OrderList.Update();
+                //display the error message
+                lblError.Text = Error;
             }
-            //redirect back to the list page
-            Response.Redirect("OrdersList.aspx");
         }
         else
         {
-            //display the error message
-            lblError.Text = Error;
+            lblError.Text = "Invalid OrderID.";
         }
-
     }
 
     protected void btnCancel_Click(object sender, EventArgs e)
