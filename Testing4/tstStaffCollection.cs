@@ -199,11 +199,11 @@ namespace Testing4
 
             if(filteredStaff.Count==2)
             {
-                if(filteredStaff.StaffList[0].EmployeeID!=44)
+                if(filteredStaff.StaffList[0].EmployeeID!=45)
                 {
                     OK = false;
                 }
-                if (filteredStaff.StaffList[1].EmployeeID != 45)
+                if (filteredStaff.StaffList[1].EmployeeID != 170)
                 {
                     OK = false;
                 }
